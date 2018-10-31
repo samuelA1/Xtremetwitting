@@ -1,0 +1,33 @@
+
+
+<div role="main">
+
+  <section *ngIf="!token" class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Join and follow Celebrities and Entrepreneurs</h1>
+      <p class="lead text-muted">It's free and will always be, signup now and enjoy a new social experience</p>
+      <p>
+        <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="btn btn-primary my-2 mr-2">
+          Login</a>
+        <a [routerLink]="['/register']" routerLinkActive="router-link-active"  class="btn btn-secondary my-2">
+          Register</a>
+      </p>
+    </div>
+  </section>
+
+  <div *ngIf="token" class="">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <form #f="ngForm" (ngSubmit)="tweet()">
+                <div class="form-group">
+                    <label for="tweet">What's on your mind?</label>
+                    <textarea class="form-control" id="tweet" rows="3"></textarea>
+                  </div>
+                  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Tweet</button>
+            </form>
+          </div>
+        </div>
+  </div>
+
+</div>

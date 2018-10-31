@@ -1,0 +1,15 @@
+.container {
+    margin-top: 40px
+}
+
+.auth-form {
+    padding: 40px;
+    color: white
+}
+
+.content {
+    min-height: calc(100vh - 70px);
+  }
+  .footer {
+    height: 50px;
+  }
