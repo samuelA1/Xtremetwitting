@@ -22,7 +22,7 @@ router.post('/register', (req, res, next) => {
             })
         } else {
             user.save();
-            const token = jwt.sign({user: user._id}, config.secret, {expiresIn: '7d'})
+            const token = jwt.sign({user: user}, config.secret, {expiresIn: '7d'})
             res.json({
                 success: true,
                 message: 'Registration successsful',
@@ -46,7 +46,7 @@ router.post('/login', (req, res, next) => {
             let passwordConfirmed = user.comparePassword(req.body.password);
 
             if (passwordConfirmed) {
-                const token = jwt.sign({user: user._id}, config.secret, {expiresIn: '7d'});
+                const token = jwt.sign({user: user}, config.secret, {expiresIn: '7d'});
                 res.json({
                     success: true,
                     message: 'Successfully logged in',

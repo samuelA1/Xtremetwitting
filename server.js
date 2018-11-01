@@ -26,7 +26,7 @@ app.use(morgan('dev'));
 
 app.use('/api', homeRoute);
 app.use('/api/auth', authRoute);
-app.use('/api/user', followRoute);
+app.use('/api/follow', followRoute);
 
 app.listen(config.port, err => {
     err ? console.log(err) : console.log('success');

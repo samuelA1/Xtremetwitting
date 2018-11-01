@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const User = require('../models/user');
-const Tweet = require('../models/tweet');
 const checkJwt = require('../middlewares/check-jwt');
 const async = require('async');
 const _ = require('underscore');
+const arrayDiffer = require('array-differ');
+
 
 router.post('/follow/:id', checkJwt, (req, res, next) => {
     async.waterfall([
@@ -90,6 +91,51 @@ router.get('/followers/following', checkJwt, (req, res, next) => {
             success:true,
             following: [following],
             followers: [followers]
+        })
+    })
+})
+
+router.get('/suggestions', checkJwt, (req, res, next) => {
+
+    async.parallel([
+        function(callback) {
+            User.find({})
+            .select(['username', 'picture', 'firstName', 'lastName'])
+            .exec((err, allUsers) => {
+                if (err) return next(err);
+
+                callback(err, allUsers)
+            })
+        },
+        function(callback) {
+            User.findOne({_id: req.decoded.user._id})
+            .populate('following')
+            .exec((err, loggedUser) => {
+                callback(err, loggedUser)
+            })
+        }
+            
+    ], function(err, results) {
+        let following = {};
+        const allUsers = results[0];
+        const loggedUser = results[1];
+
+        loggedUser.following.forEach(elt => {
+            Object.assign(following, {
+                _id: elt._id,
+                firstName: elt.firstName,
+                lastName: elt.lastName,
+                username: elt.username,
+                picture: elt.picture
+            })
+        })
+        following = [following]
+
+        // const suggestions = _.intersection(following, allUsers)
+        
+        res.json({
+            following: following,
+            allUsers: allUsers
         })
     })
 })
