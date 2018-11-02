@@ -119,6 +119,7 @@ router.get('/suggestions', checkJwt, (req, res, next) => {
         let following = {};
         const allUsers = results[0];
         const loggedUser = results[1];
+        let suggestions = []
 
         loggedUser.following.forEach(elt => {
             Object.assign(following, {
@@ -131,11 +132,43 @@ router.get('/suggestions', checkJwt, (req, res, next) => {
         })
         following = [following]
 
-        // const suggestions = _.intersection(following, allUsers)
+        // function comparer(otherArray){
+        //     return function(current){
+        //       return otherArray.filter(function(other){
+        //         return other.username == current.username 
+        //       }).length == 0;
+        //     }
+        //   }
+          
+        //   var onlyInA = allUsers.filter(comparer(following));
+        //   var onlyInB = following.filter(comparer(allUsers));
+          
+        //   const suggestions = onlyInA.concat(onlyInB);
+
+        allUsers.forEach((item) => {
+            if (name(item)) {
+                suggestions.push(item)
+            } else {
+                console.log('false')
+            }
+        })
+
+        function name(params) {
+            for (let i = 0; i < following.length; i++) {
+                if (following[i].username != params.username) {
+                    return true
+                }else {
+                    return false
+                }
+                
+            }
+        }
+
         
         res.json({
-            following: following,
-            allUsers: allUsers
+            // following: following,
+            // allUsers: allUsers
+            suggestions: suggestions
         })
     })
 })

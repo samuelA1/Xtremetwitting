@@ -110,9 +110,11 @@ router.route('/tweet')
     })
 
     router.get('/recent', checkJwt, (req, res, next) => {
-        var today = new Date().toISOString().slice(0, 10);
-        Tweet.find({dateTweeted: today}, (err, tweets) => {
+        Tweet.find({})
+        .sort({_id: -1})
+        .exec((err, tweets) => {
             if (err) next(err);
+            
 
             res.json({
                 success: true,
