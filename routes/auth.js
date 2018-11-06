@@ -26,13 +26,7 @@ router.post('/register', (req, res, next) => {
             res.json({
                 success: true,
                 message: 'Registration successsful',
-                token: token,
-                user: {
-                    username: user.username,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName
-                }
+                token: token
             });
         }
     })
@@ -50,13 +44,7 @@ router.post('/login', (req, res, next) => {
                 res.json({
                     success: true,
                     message: 'Successfully logged in',
-                    token: token,
-                    user: {
-                        username: user.username,
-                        email: user.email,
-                        firstName: user.firstName,
-                        lastName: user.lastName
-                    }
+                    token: token
                 })
             } else {
                 res.json({

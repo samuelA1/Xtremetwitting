@@ -9,21 +9,40 @@
                <circle cx="12" cy="13" r="4"></circle></svg>
               <strong>Twitter</strong>
             </a>
-            <div class="list-inline">
-                <a *ngIf="token" class="list-inline-item mr-5" href="#">{{user.username}}</a>
-                <a *ngIf="token" class="list-inline-item" href="#" (click)="logout()">Sign out</a>
+            <div class="col-6 mb-2 text-center">
+              <input type="text" class="form-control" placeholder="Search">
             </div>
+            <div class="list-inline">
+                <img src="{{authService.user.user.picture}}" alt="{{authService.user.user.username}}"
+                 class="mr-3">
+                 <button class="btn btn-primary btn-tweet" (click)="open(content)"><strong>Tweet</strong></button>
+              </div>
           </div>
         </div>
       </header>
+
+      <ng-template #content let-modal>
+          <div class="modal-header text-center">
+            <h4 class="modal-title" id="modal-basic-title">Compose new Tweet</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #tweetForm="ngForm" id="tweetForm">
+              <div class="form-group">
+                <div class="input-group">
+                  <textarea name="tweet" cols="10" rows="3" class="form-control"
+                   placeholder="What's happening?" ></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button   type="button" class="btn btn-primary"
+             (click)="modal.close('Save click')">Save</button>
+          </div>
+        </ng-template>
+            
     <router-outlet></router-outlet>
-    <footer class="text-muted mt-5 footer">
-            <div class="container">
-              <p class="float-right">
-                <a href="#">Back to top</a>
-              </p>
-              <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-              <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-            </div>
-    </footer>
 </div>

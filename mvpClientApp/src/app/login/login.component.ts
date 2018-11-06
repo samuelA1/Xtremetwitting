@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,14 @@ import { AuthService } from '../_services/auth.service';
 })
 export class LoginComponent implements OnInit {
 model: any = {};
-token;
-user: any;
-message: string;
 returnUrl;
+helper = new JwtHelperService();
 
-  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute) { }
+
+  constructor(private router: Router, 
+    private authService: AuthService, 
+    private route: ActivatedRoute,
+    private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.route.params.subscribe(res => {
@@ -23,15 +27,18 @@ returnUrl;
   }
 
   async login () {
-    if (this.loginValidation()) {
-      const user = await this.authService.login(this.model);
-      user['success'] ? (this.token = user['token'], 
-      localStorage.setItem('token', this.token),
-      localStorage.setItem('user', JSON.stringify(user['user'])),
-      this.user = user['user'], this.router.navigateByUrl(this.returnUrl))
-       : this.message= user['message']
-    } else {
-      this.message ='check your input fields'
+    try {
+      if (this.loginValidation()) {
+        const user = await this.authService.login(this.model);
+        user['success'] ? (this.alertify.success('Login successful'),
+        localStorage.setItem('token', user['token']),
+        this.router.navigateByUrl(this.returnUrl))
+         : this.alertify.message(user['message'])
+      } else {
+        this.alertify.error('Check your input fields')
+          }
+    } catch (error) {
+      this.alertify.error('Unable to login. Check your email and password');
     }
   }
 
@@ -40,11 +47,11 @@ returnUrl;
       if (this.model.password) {
         return true;
       } else {
-        this.message = 'Enter password'
+        this.alertify.message('Enter your password')
       }
     } else {
-      this.message = 'Enter email'
-        }
+      this.alertify.message('Enter your email')
+            }
   }
 
 }

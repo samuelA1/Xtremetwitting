@@ -149,7 +149,10 @@ router.get('/suggestions', checkJwt, (req, res, next) => {
             if (name(item)) {
                 suggestions.push(item)
             } else {
-                console.log('false')
+                res.json({
+                    success: true,
+                    message: 'There are no users to follow'
+                })
             }
         })
 

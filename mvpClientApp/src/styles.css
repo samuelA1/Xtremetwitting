@@ -1,5 +1,8 @@
-.container {
-    margin-top: 40px
+@import "../node_modules/alertifyjs/build/css/alertify.min.css";
+@import "../node_modules//alertifyjs/build/css/themes/bootstrap.min.css";
+
+.navbar {
+    margin-bottom: 40px
 }
 
 .auth-form {
@@ -10,6 +13,11 @@
 .content {
     min-height: calc(100vh - 70px);
   }
-  .footer {
-    height: 50px;
-  }
+
+.footer {
+height: 50px;
+}
+
+a {
+    color: white;
+}

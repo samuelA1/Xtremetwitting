@@ -1,3 +1,13 @@
 .navbar{
     padding: 0;
 }
+
+.btn-tweet {
+    border-radius: 100px;
+    margin: 5px;
+}
+
+img {
+    border-radius: 50%;
+    width: 50px;
+}
