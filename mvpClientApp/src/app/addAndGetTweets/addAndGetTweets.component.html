@@ -1,0 +1,22 @@
+
+          
+            <form #f="ngForm" (ngSubmit)="postTweet()">
+                <div class="form-group">
+                    <label for="tweet">What's on your mind?<textarea name="tweet" class="form-control" id="tweet" rows="1" [(ngModel)]="tweet.tweet"></textarea>
+                    </label>
+                    <button [disabled]="!f.dirty" type="submit" class="btn btn-primary mb-3">Tweet</button>
+                  </div>
+            </form>
+         
+
+
+<div class="card" *ngFor="let tweet of tweets">
+    <div class="card-body list-inline">
+        <img class="list-inline-item" src="{{tweet.owner.picture}}" alt="{{tweet.owner.username}}"
+        class="mr-3">
+      <h6 class="card-title list-inline-item">{{tweet.owner.firstName}} {{tweet.owner.lastName}}
+        <strong>@{{tweet.owner.username}}</strong></h6>
+      <p class="card-text mt-3">{{tweet.tweet}}</p>
+      <small class="text-muted">{{tweet.dateTweeted | date: 'longDate'}}</small>
+    </div>
+  </div>

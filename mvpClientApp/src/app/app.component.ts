@@ -15,6 +15,7 @@ export class AppComponent {
   token;
   helper = new JwtHelperService();
   closeResult: string;
+  tweet: any = {}
 
 
 

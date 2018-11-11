@@ -2,11 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
+
 
 
 const UserSchema = new Schema({
-    firstName: {type: String, unique: true},
-    lastName: {type: String, unique: true},
+    firstName: {type: String, unique: true, lowercase: true},
+    lastName: {type: String, unique: true, lowercase: true},
     username: {type: String, unique: true},
     email: {type: String, unique: true, lowercase: true},
     password: String,
@@ -42,4 +44,5 @@ UserSchema.methods.gravatar = function(size) {
     }
 }
 
+UserSchema.plugin(deepPopulate);
 module.exports = mongoose.model('User', UserSchema);

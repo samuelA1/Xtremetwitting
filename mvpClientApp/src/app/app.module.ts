@@ -12,6 +12,9 @@ import { HomeComponent } from '../app/home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.component';
+
 
 @NgModule({
    declarations: [
@@ -19,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       HomeComponent,
       LoginComponent,
       RegisterComponent,
+      SuggestionsComponent,
+      AddAndGetTweetsComponent
    ],
    imports: [
       BrowserModule,

@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  helper = new JwtHelperService()
 
 constructor(private router: Router) {}
 
@@ -13,7 +15,7 @@ constructor(private router: Router) {}
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,): Observable<boolean> | Promise<boolean> | boolean {
       const token = localStorage.getItem('token');
-      if (token) return true;
+      if (!this.helper.isTokenExpired(token)) return true;
 
       this.router.navigate(['/login', {returnUrl: state.url}]);
       return false;

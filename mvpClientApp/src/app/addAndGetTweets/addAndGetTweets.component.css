@@ -1,0 +1,34 @@
+.card-body {
+    width: 335px;
+}
+
+.card {
+    width: 335px;
+}
+
+img {
+    border-radius: 50%;
+    width: 40px;
+}
+
+textarea {
+    height: 100px;
+}
+
+textarea {
+    border-radius: 30px;
+}
+
+@media (min-width: 768px) {
+    .card-body {
+        width: 510px;
+    }
+    
+    .card {
+        width: 510px;
+    }
+    textarea {
+        width: 510px;
+        }
+}
+

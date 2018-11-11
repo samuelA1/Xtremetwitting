@@ -1,34 +1,34 @@
 <div class="container ">
     <div class="row">
       <div class="col-lg-4 offset-lg-4 bg-dark auth-form">
-          <form #f="ngForm" >
-              <div class="form-group" (ngSubmit)="register()">
+          <form #f="ngForm" (ngSubmit)="register()">
+              <div class="form-group" >
                   <label for="firstName">First Name</label>
                   <input type="text" class="form-control" id="firstName" placeholder="First Name"
-                  name="firstName" [(ngModel)]="model.firstName">
+                  name="firstName" [(ngModel)]="user.firstName">
                 </div>
               <div class="form-group">
                   <label for="lastName">Last Name</label>
                   <input type="text" class="form-control" id="lastName" placeholder="Last Name"
-                  name="lastName" [(ngModel)]="model.lastName">
-                </div>
+                  name="lastName" [(ngModel)]="user.lastName">
+              </div>
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Username" 
-                    name="username" [(ngModel)]="model.username">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" placeholder="Email" 
+                    name="email" [(ngModel)]="user.email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                   </div>
               <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
-                name="email" [(ngModel)]="model.email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="email">Username</label>
+                <input type="text" class="form-control" id="email"  placeholder="Username"
+                name="username" [(ngModel)]="user.username">
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password" 
-                name="password" [(ngModel)]="model.password">
+                name="password" [(ngModel)]="user.password">
               </div>
-              <button disabled="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+              <button  type="submit" class="btn btn-primary">Submit</button>
             </form>
       </div>
     </div>

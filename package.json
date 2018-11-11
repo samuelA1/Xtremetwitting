@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.3.4",
+    "mongoose-deep-populate": "^3.1.1",
     "morgan": "^1.9.1",
     "node-bcrypt": "0.0.1",
     "nodemon": "^1.18.4",
