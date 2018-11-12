@@ -8,7 +8,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserService {
   apiUrl = environment.apiUrl;
-  tweet = new BehaviorSubject<any>({});
+  tweet = new BehaviorSubject<any>({tweet: 'See and read whats going on in the world from twitter daily',owner: {firstName: 'See all great',
+   lastName: 'adverts here ',
+    username: 'teamtwitter', picture: 'https://picsum.photos/200/300'
+  }});
   recentTweet = this.tweet.asObservable();
 
 constructor(private http: HttpClient) { }
@@ -37,6 +40,10 @@ getUserRecentTweets() {
 
 deleteTweet(id) {
   return this.http.delete(this.apiUrl + 'tweet/' + id, {headers: this.headers}).toPromise();
+}
+
+getAllUsers() {
+  return this.http.get(this.apiUrl + 'users', {headers: this.headers}).toPromise();
 }
 
 }

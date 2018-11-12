@@ -1,0 +1,9 @@
+input{
+    border-radius: 30px;
+    width: 300px;
+}
+
+img {
+    border-radius: 50%;
+    width: 40px;
+}

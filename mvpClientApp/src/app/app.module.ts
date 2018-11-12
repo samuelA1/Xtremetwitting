@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TimeAgoPipe } from 'time-ago-pipe';
       RegisterComponent,
       SuggestionsComponent,
       AddAndGetTweetsComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      SearchComponent
    ],
    imports: [
       BrowserModule,

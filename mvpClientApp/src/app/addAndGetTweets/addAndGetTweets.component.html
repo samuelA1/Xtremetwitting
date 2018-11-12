@@ -1,11 +1,13 @@
 
-          
-            <form #f="ngForm" (ngSubmit)="postTweet()">
-                <div class="form-group">
-                    <label for="tweet">What's on your mind?<textarea name="tweet" class="form-control" id="tweet" rows="1" [(ngModel)]="tweet.tweet"></textarea>
+
+            <form #f="ngForm" (ngSubmit)="postTweet()" class="text-center">
+                <div class="form-group ">
+                    <label for="tweet">What's on your mind?<textarea name="tweet" class="form-control" id="tweet" 
+                      rows="1" [(ngModel)]="tweet.tweet">
+                    </textarea>
                     </label>
-                    <button [disabled]="!f.dirty" type="submit" class="btn btn-primary mb-3">Tweet</button>
-                  </div>
+                    <button [disabled]="!f.dirty" type="submit" class="btn btn-primary mb-5 float-left">Tweet</button>
+                </div>
             </form>
          
 
@@ -22,3 +24,4 @@
        class="btn btn-danger btn-sm  float-right" type="button" (click)="deleteTweet(tweet._id)">Delete</button>
     </div>
   </div>
+

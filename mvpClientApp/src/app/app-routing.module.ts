@@ -1,3 +1,4 @@
+import { SearchComponent } from './search/search.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
   runGuardsAndResolvers: 'always',
   canActivate: [AuthGuard],
   children: [
-
+    {path:'search', component: SearchComponent}
   ]
 },
 {path: '**', redirectTo: '', pathMatch: 'full'}

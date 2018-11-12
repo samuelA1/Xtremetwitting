@@ -21,3 +21,11 @@ height: 50px;
 a {
     color: white;
 }
+
+.alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button.ajs-ok {
+    background-color: red;
+}
+
+.alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
+    border-radius: 30px;
+}
