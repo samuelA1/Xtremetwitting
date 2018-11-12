@@ -12,11 +12,11 @@
 
 <div class="card" *ngFor="let tweet of tweets">
     <div class="card-body list-inline">
-        <img class="list-inline-item" src="{{tweet.owner.picture}}" alt="{{tweet.owner.username}}"
+        <img class="list-inline-item" src="{{tweet.owner?.picture}}" alt="{{tweet.owner?.username}}"
         class="mr-3">
-      <h6 class="card-title list-inline-item">{{tweet.owner.firstName}} {{tweet.owner.lastName}}
-        <strong>@{{tweet.owner.username}}</strong></h6>
+      <h6 class="card-title list-inline-item">{{tweet.owner?.firstName}} {{tweet.owner?.lastName}}
+        <strong>@{{tweet.owner?.username}}</strong></h6>
       <p class="card-text mt-3">{{tweet.tweet}}</p>
-      <small class="text-muted">{{tweet.dateTweeted | date: 'longDate'}}</small>
+      <small class="text-muted">{{tweet.dateTweeted | date : 'longDate'}}</small>
     </div>
   </div>

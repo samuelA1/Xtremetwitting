@@ -29,7 +29,7 @@ register(model: any) {
   })
 }
 
-async login(model: any) {
+login(model: any) {
   return this.http.post(this.apiUrl + 'auth/login', model).toPromise()
   .then((res) => {
     this.user = this.helper.decodeToken(res['token'])

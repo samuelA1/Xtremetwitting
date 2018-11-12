@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from '../app/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PreventChangesGuard } from './_guards/prevent-changes.guard';
+import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,7 +15,7 @@ const routes: Routes = [
   runGuardsAndResolvers: 'always',
   canActivate: [AuthGuard],
   children: [
-    
+
   ]
 },
 {path: '**', redirectTo: '', pathMatch: 'full'}

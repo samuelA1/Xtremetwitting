@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PreventChangesGuard } from './_guards/prevent-changes.guard';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.component';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.comp
       LoginComponent,
       RegisterComponent,
       SuggestionsComponent,
-      AddAndGetTweetsComponent
+      AddAndGetTweetsComponent,
+      TimeAgoPipe
    ],
    imports: [
       BrowserModule,
@@ -35,7 +39,8 @@ import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.comp
    providers: [
       AuthService,
       AuthGuard,
-      AlertifyService
+      AlertifyService,
+      PreventChangesGuard
    ],
    bootstrap: [
       AppComponent

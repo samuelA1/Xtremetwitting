@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserService } from './_services/user.service';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -22,11 +24,12 @@ export class AppComponent {
   constructor(private router: Router,
      public authService: AuthService,
       private alertify: AlertifyService,
-      private modalService: NgbModal) {
+      private modalService: NgbModal,
+      private userService: UserService) {
      this.token = localStorage.getItem('token')
 
     if (!this.helper.isTokenExpired(this.token)) {
-      this.router.navigate(['/'])
+      this.router.navigate([''])
       authService.user = this.helper.decodeToken(this.token)
       authService.text = 'Sign out'
     } else (
@@ -35,11 +38,45 @@ export class AppComponent {
   }
 
   logout() {
+    this.router.navigate(['/login']);
     this.authService.text = '';
     this.authService.user.user = {}
     localStorage.clear();
-    this.router.navigate(['/login']);
     this.alertify.success('Logout successful')
+  }
+
+  tweetRecent() {
+    this.userService.addRecentTweet({tweet: 'Thou art'});
+  }
+
+  async postTweet() {
+    try {
+      if (this.tweetValidation()) {
+        this.userService.addRecentTweet({dateTweeted: Date.now(),
+          tweet: this.tweet['tweet'], owner: {firstName: this.authService.user.user.firstName,
+          lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
+          picture: this.authService.user.user.picture
+        }});
+        const tweet = await this.userService.postTweet(this.tweet);
+        if (tweet['success']) {
+          this.alertify.success('Tweet created');
+        } else {
+          this.alertify.error('Unable to create tweet')
+        }
+      } else {
+        this.alertify.error('Please enter a tweet')
+      }
+    } catch (error) {
+      this.alertify.error(error.message);
+    }
+  }
+
+  tweetValidation() {
+    if (this.tweet.tweet) {
+      return true
+    } else {
+      this.alertify.error('Please enter a tweet')
+    }
   }
 
   

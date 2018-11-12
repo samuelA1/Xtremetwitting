@@ -122,10 +122,27 @@ router.route('/tweet')
                 result = result.concat(user.following[i].tweets);
                 res.json({
                     success: true,
-                    tweets: _.sortBy(result, 'dateTweeted')
+                    tweets: result.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } )
                 })            
             })
             
+        })
+
+        router.get('/userRecent', checkJwt, (req, res, next) => {
+            User.findOne({_id: req.decoded.user._id})
+            .populate('tweets')
+            .deepPopulate('tweets.owner')
+            .exec((err, user) => {
+                if (err) return next(err);
+
+                var date = new Date().toISOString().slice(0, 10);
+                const userRecentTweets = user.tweets.filter(elt => elt.dateTweeted = date);
+                res.json({
+                    success: true,
+                    tweets: userRecentTweets,
+                })
+
+            })
         })
 
         

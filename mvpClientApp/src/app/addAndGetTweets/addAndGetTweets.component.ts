@@ -24,8 +24,9 @@ tweets: any[];
   async getTweets() {
     try {
       const tweets = await this.userService.getTweets();
+      const recentTweets = await this.userService.getUserRecentTweets();
       if (tweets['success']) {
-        this.tweets = tweets['tweets'];
+        this.tweets = tweets['tweets'].concat(recentTweets['tweets'])
       } else {
         this.alertify.message('No tweets')
       }
@@ -37,7 +38,6 @@ tweets: any[];
   async postTweet() {
     try {
       if (this.tweetValidation()) {
-        this.f.reset();
         this.tweets.unshift({dateTweeted: Date.now(),
         tweet: this.tweet['tweet'], owner: {firstName: this.authService.user.user.firstName,
         lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
@@ -45,6 +45,7 @@ tweets: any[];
       }});
         const tweet = await this.userService.postTweet(this.tweet);
         if (tweet['success']) {
+          this.f.reset();
           this.alertify.success('Tweet created');
         } else {
           this.alertify.error('Unable to create tweet')
@@ -68,6 +69,11 @@ tweets: any[];
   async ngOnInit() {
     this.token = localStorage.getItem('token');
     await this.getTweets()
+    this.addRecentTweet()
+  }
+
+  addRecentTweet() {
+    this.userService.recentTweet.subscribe(tweetObj => this.tweets.unshift(tweetObj))
   }
 
 }

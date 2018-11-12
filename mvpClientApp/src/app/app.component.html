@@ -30,7 +30,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form #tweetForm="ngForm" id="tweetForm">
+            <form #tweetForm="ngForm" id="tweetForm" >
               <div class="form-group">
                 <div class="input-group">
                   <textarea name="tweet" cols="10" rows="3" class="form-control"
@@ -40,8 +40,8 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button [disabled]="!tweetForm.dirty" form="tweetForm" type="submit" class="btn btn-primary"
-             (click)="modal.close('Save click')">Save</button>
+            <button [disabled]="!tweetForm.dirty" form="tweetForm" type="button" class="btn btn-primary"
+             (click)="modal.close('Save click');postTweet()">Save</button>
           </div>
         </ng-template>
             
