@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -33,6 +33,10 @@ postTweet(tweet: any) {
 
 getUserRecentTweets() {
   return this.http.get(this.apiUrl + 'userRecent', {headers: this.headers}).toPromise();
+}
+
+deleteTweet(id) {
+  return this.http.delete(this.apiUrl + 'tweet/' + id, {headers: this.headers}).toPromise();
 }
 
 }

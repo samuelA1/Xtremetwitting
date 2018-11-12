@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { UserService } from '../_services/tweet.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { NgForm } from '@angular/forms';
@@ -56,6 +56,14 @@ tweets: any[];
     } catch (error) {
       this.alertify.error(error.message);
     }
+  }
+
+  async deleteTweet(id) {
+    this.alertify.confirm('Are you sure you want to delete this tweet?', () => {
+      this.userService.deleteTweet(id);
+      this.tweets.splice(this.tweets.findIndex(t => t._id === id), 1)
+      this.alertify.success('Tweet deleted');
+    })
   }
 
   tweetValidation() {
