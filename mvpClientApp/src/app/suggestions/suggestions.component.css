@@ -1,0 +1,20 @@
+img {
+    border-radius: 50%;
+    width: 50px;
+}
+
+.card-body {
+    width: 335px;
+}
+
+.card {
+    width: 335px;
+}
+
+.btn {
+    border-radius: 100px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 360px) {
+    .card { display: none; }  
+  }

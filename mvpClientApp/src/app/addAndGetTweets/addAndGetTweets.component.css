@@ -12,11 +12,16 @@ img {
 }
 
 textarea {
+    width: 300px;
     height: 100px;
 }
 
 textarea {
     border-radius: 30px;
+}
+
+.readyToTweet{
+    background-color: #E8F5FD;
 }
 
 @media (min-width: 768px) {
@@ -28,7 +33,12 @@ textarea {
         width: 510px;
     }
     textarea {
-        width: 510px;
+        width: 450px;
         }
+    .btn-primary{
+        float: left;
+    }
 }
+
+
 

@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class TweetService {
   apiUrl = environment.apiUrl;
   tweet = new BehaviorSubject<any>({tweet: 'See and read whats going on in the world from twitter daily',owner: {firstName: 'See all great',
    lastName: 'adverts here ',
@@ -42,8 +42,6 @@ deleteTweet(id) {
   return this.http.delete(this.apiUrl + 'tweet/' + id, {headers: this.headers}).toPromise();
 }
 
-getAllUsers() {
-  return this.http.get(this.apiUrl + 'users', {headers: this.headers}).toPromise();
-}
+
 
 }

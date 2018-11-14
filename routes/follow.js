@@ -60,8 +60,8 @@ router.post('/unfollow/:id', checkJwt, (req, res, next) => {
 })
 
 router.get('/followers/following', checkJwt, (req, res, next) => {
-    const following = {};
-    const followers = {};
+    const following = [];
+    const followers = [];
     User.findOne({_id: req.decoded.user._id})
     .populate('following')
     .populate('followers')
@@ -69,7 +69,7 @@ router.get('/followers/following', checkJwt, (req, res, next) => {
         if (err) return next(err);
 
         user.following.forEach(elt => {
-            Object.assign(following, {
+            following.push({
                 username: elt.username,
                 firstName: elt.firstName,
                 lastName: elt.lastName,
@@ -78,7 +78,7 @@ router.get('/followers/following', checkJwt, (req, res, next) => {
         })
 
         user.followers.forEach(elt => {
-            Object.assign(followers, {
+            followers.push({
                 username: elt.username,
                 firstName: elt.firstName,
                 lastName: elt.lastName,
@@ -89,8 +89,8 @@ router.get('/followers/following', checkJwt, (req, res, next) => {
 
         res.json({
             success:true,
-            following: [following],
-            followers: [followers]
+            following: following,
+            followers: followers
         })
     })
 })
@@ -116,13 +116,12 @@ router.get('/suggestions', checkJwt, (req, res, next) => {
         }
             
     ], function(err, results) {
-        let following = {};
+        let following = [];
         const allUsers = results[0];
         const loggedUser = results[1];
-        let suggestions = []
 
         loggedUser.following.forEach(elt => {
-            Object.assign(following, {
+            following.push({
                 _id: elt._id,
                 firstName: elt.firstName,
                 lastName: elt.lastName,
@@ -130,47 +129,23 @@ router.get('/suggestions', checkJwt, (req, res, next) => {
                 picture: elt.picture
             })
         })
-        following = [following]
 
-        // function comparer(otherArray){
-        //     return function(current){
-        //       return otherArray.filter(function(other){
-        //         return other.username == current.username 
-        //       }).length == 0;
-        //     }
-        //   }
-          
-        //   var onlyInA = allUsers.filter(comparer(following));
-        //   var onlyInB = following.filter(comparer(allUsers));
-          
-        //   const suggestions = onlyInA.concat(onlyInB);
-
-        allUsers.forEach((item) => {
-            if (name(item)) {
-                suggestions.push(item)
-            } else {
-                res.json({
-                    success: true,
-                    message: 'There are no users to follow'
-                })
+        function comparer(otherArray){
+            return function(current){
+              return otherArray.filter(function(other){
+                return other.username == current.username 
+              }).length == 0;
             }
-        })
+          }
+          
+          var onlyInA = allUsers.filter(comparer(following));
+          var onlyInB = following.filter(comparer(allUsers));
+          
+          const suggestions = onlyInA.concat(onlyInB);
 
-        function name(params) {
-            for (let i = 0; i < following.length; i++) {
-                if (following[i].username != params.username) {
-                    return true
-                }else {
-                    return false
-                }
-                
-            }
-        }
 
         
         res.json({
-            // following: following,
-            // allUsers: allUsers
             suggestions: suggestions
         })
     })

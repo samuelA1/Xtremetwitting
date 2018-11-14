@@ -1,5 +1,5 @@
 import { NgForm } from '@angular/forms';
-import { UserService } from './_services/tweet.service';
+import { TweetService } from './_services/tweet.service';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
@@ -25,7 +25,7 @@ export class AppComponent {
      public authService: AuthService,
       private alertify: AlertifyService,
       private modalService: NgbModal,
-      private userService: UserService) {
+      private userService: TweetService) {
      this.token = localStorage.getItem('token')
 
     if (!this.helper.isTokenExpired(this.token)) {
@@ -43,10 +43,6 @@ export class AppComponent {
     this.authService.user.user = {}
     localStorage.clear();
     this.alertify.success('Logout successful')
-  }
-
-  tweetRecent() {
-    this.userService.addRecentTweet({tweet: 'Thou art'});
   }
 
   async postTweet() {

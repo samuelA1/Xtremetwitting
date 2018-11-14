@@ -109,6 +109,7 @@ router.route('/tweet')
         ])
     })
 
+    // Get tweets of followed users
     router.get('/recent', checkJwt, (req, res, next) => {
         User.findOne({_id: req.decoded.user._id})
         .populate('following')
@@ -117,7 +118,7 @@ router.route('/tweet')
         .exec((err, user) => {
             if (err) next(err);
 
-            let result = [];
+            var result = [];
             for(var i=0; i<user.following.length; i++)
                 result = result.concat(user.following[i].tweets);
                 res.json({

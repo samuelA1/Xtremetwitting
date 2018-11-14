@@ -1,3 +1,18 @@
-<p>
-  suggestions works!
-</p>
+<div class="card" >
+  <h4 class="text-center mt-3">Who to follow?</h4>
+    <div class="card-body list-inline" *ngFor="let user of suggestions">
+        <div class="float-left">
+            <img class="list-inline-item" src="{{user?.picture}}" alt="{{user?.username}}"
+            class="mr-3">
+        </div>
+       <div class="float-left">
+          <h6 class="card-title list-inline-item">{{user?.firstName}} {{user?.lastName}}
+          <strong>@{{user?.username}}</strong></h6>
+          <br>
+          <button type="button" class="btn btn-outline-primary mt-1 btn-sm" (click)="follow(user._id)">Follow</button>
+          <hr>
+       </div>
+    </div>
+    <p class="text-center"><strong>Made by Samuel Essim</strong></p>
+    <p class="text-center text-muted">© 2018 Twitter</p>
+  </div>

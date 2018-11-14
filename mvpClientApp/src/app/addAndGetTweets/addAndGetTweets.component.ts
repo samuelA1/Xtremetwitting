@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../_services/tweet.service';
+import { TweetService } from '../_services/tweet.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { NgForm } from '@angular/forms';
@@ -16,7 +16,7 @@ tweet: any = {}
 tweets: any[];
   
 
-  constructor(private userService: UserService,
+  constructor(private userService: TweetService,
      private alertify: AlertifyService, 
     private authService: AuthService,
     ) { }

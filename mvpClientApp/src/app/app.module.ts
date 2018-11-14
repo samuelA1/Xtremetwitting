@@ -1,3 +1,5 @@
+import { UserService } from './_services/user.service';
+import { TweetService } from './_services/tweet.service';
 import { AlertifyService } from './_services/alertify.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthService } from './_services/auth.service';
@@ -14,10 +16,10 @@ import { HomeComponent } from '../app/home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { SearchComponent } from './search/search.component';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { SearchComponent } from './search/search.component';
       SuggestionsComponent,
       AddAndGetTweetsComponent,
       TimeAgoPipe,
-      SearchComponent
+      SearchComponent,
+      SuggestionsComponent
    ],
    imports: [
       BrowserModule,
@@ -42,7 +45,9 @@ import { SearchComponent } from './search/search.component';
       AuthService,
       AuthGuard,
       AlertifyService,
-      PreventChangesGuard
+      PreventChangesGuard,
+      UserService,
+      TweetService
    ],
    bootstrap: [
       AppComponent

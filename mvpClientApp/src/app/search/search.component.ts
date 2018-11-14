@@ -1,4 +1,4 @@
-import { UserService } from './../_services/tweet.service';
+import { UserService } from './../_services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,10 +12,10 @@ export class SearchComponent implements OnInit {
   unFiltered: any[]
   allUsers: any[];
 
-  constructor(private tweetService: UserService) { }
+  constructor( private userService: UserService) { }
 
   async search() {
-     const users = await this.tweetService.getAllUsers();
+     const users = await this.userService.getAllUsers();
      this.allUsers = users['user']
     this.users = (this.searchTweet.search) ?  this.allUsers.filter(u => u.firstName.toLowerCase()
     .includes(this.searchTweet.search.toLowerCase()) ) : this.unFiltered;
