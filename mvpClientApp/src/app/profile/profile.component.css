@@ -1,0 +1,32 @@
+.card-image-top {
+    background-color: #e9ecef;
+}
+
+.img-profile {
+    width: 200px;
+}
+
+img {
+    border-radius: 50%;
+}
+
+/* h4:hover {
+    color: #1DA1F2;
+} */
+
+
+.img-tweet {
+    width: 40px;
+}
+
+.tabChange > h4 {
+    color:  #1DA1F2;
+}
+
+.unChange {
+    color: black;
+}
+
+.btn-outline-primary {
+    border-radius: 100px;
+}

@@ -22,10 +22,11 @@ router.get('/users', checkJwt, (req, res, next) => {
     })
 })
 
+
 router.get('/user/:id', checkJwt, (req, res, next) => {
     const userId = req.params.id;
     User.findOne({_id: userId})
-    .select(['username', 'firstName', 'lastName', 'following', 'followers'])
+    .select(['username', 'firstName', 'lastName', 'following', 'followers', 'picture', 'tweets'])
     .populate('tweets')
     .exec((err, user) => {
         if (err) return next(err);
@@ -35,7 +36,7 @@ router.get('/user/:id', checkJwt, (req, res, next) => {
         res.json({
             success: true,
             user: user,
-            nuFollowers: numberFollowers,
+            numFollowers: numberFollowers,
             numFollowing: numberFollowing
         })
     })

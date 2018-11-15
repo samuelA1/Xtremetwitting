@@ -2,7 +2,7 @@
 
 <div role="main">
 
-  <section *ngIf="!token" class="jumbotron text-center">
+  <section *ngIf="!token" class=" text-center">
     <div class="container">
       <h1 class="jumbotron-heading">Join and follow Celebrities and Entrepreneurs</h1>
       <p class="lead text-muted">It's free and will always be, signup now and enjoy a new social experience</p>
@@ -18,18 +18,39 @@
   <div *ngIf="token">
     <div class="container">
         <div class="row">
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-body">
-                
-              </div>
-            </div>
+          <div class="col-lg-3">
+              <div class="card">
+                  <div class="card-body">
+                    <div class="text-center">
+                        <a routerLink="/profile/{{authService.user?.user._id}}" routerLinkActive="router-link-active" >
+                          <img src="{{authService.user?.user.picture}}" alt="{{authService.user?.user.username}}">
+                        </a>
+                      <br>
+                      <a routerLink="/profile/{{authService.user?.user._id}}" routerLinkActive="router-link-active" >
+                        <strong>{{authService.user?.user.firstName}} {{authService.user?.user.lastName}}</strong>
+                      </a>
+                      
+                      <br>
+                      <small class="text-muted text-center">@{{authService.user?.user.username}}</small>
+                    </div>
+                    <div class="list-inline text-center">
+                      <small class="list-inline-item mr-3"><strong>Tweets</strong></small>
+                      <small class="list-inline-item mr-3"><strong>Following</strong></small>
+                      <small class="list-inline-item mr-3"><strong>Followers</strong></small>
+                    </div>
+                    <div class="list-inline text-center">
+                      <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfTweets}}</h4>
+                      <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowing}}</h4>
+                      <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowers}}</h4>
+                    </div>
+                  </div>
+                </div>
           </div>
-            <div class="col-md-6">
-              <app-addAndGetTweets></app-addAndGetTweets>
+            <div class="col-lg-6">
+              <app-addAndGetTweets (reduce)=reduceSomething($event)></app-addAndGetTweets>
             </div>
-            <div class="col-md-3">
-              <app-suggestions></app-suggestions>
+            <div class="col-lg-3">
+              <app-suggestions (reduce)=reduceSomething($event)></app-suggestions>
             </div>
         </div>
     </div>

@@ -101,8 +101,12 @@ router.get('/suggestions', checkJwt, (req, res, next) => {
         function(callback) {
             User.find({})
             .select(['username', 'picture', 'firstName', 'lastName'])
-            .exec((err, allUsers) => {
+            .exec((err, filteredUsers) => {
                 if (err) return next(err);
+
+                var loggedUserId = req.decoded.user._id;
+                var allUsers;
+               allUsers =  filteredUsers.filter(u => u._id !=loggedUserId )
 
                 callback(err, allUsers)
             })

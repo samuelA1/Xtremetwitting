@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +13,13 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('tweetForm') tweetForm: NgForm
   title = 'twitter';
   token;
   helper = new JwtHelperService();
   closeResult: string;
   tweet: any = {}
+  modalRef: Promise<void>;
 
 
 
@@ -26,15 +28,10 @@ export class AppComponent {
       private alertify: AlertifyService,
       private modalService: NgbModal,
       private userService: TweetService) {
-     this.token = localStorage.getItem('token')
-
-    if (!this.helper.isTokenExpired(this.token)) {
-      this.router.navigate([''])
+      this.token = localStorage.getItem('token')
       authService.user = this.helper.decodeToken(this.token)
       authService.text = 'Sign out'
-    } else (
-      this.router.navigate(['/login'])
-    )
+  
   }
 
   logout() {
@@ -75,12 +72,20 @@ export class AppComponent {
     }
   }
 
-  
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+    const options  = {
+      beforeDismiss: () => {
+        this.alertify.confirm('Are you sure you want to discard this tweet?', () => {
+          return false;
+        })
+
+        return true;
+      }
+    };
+    this.modalRef = this.modalService.open(content, options).result.then((result) => {
+      //this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
@@ -93,4 +98,6 @@ export class AppComponent {
       return  `with: ${reason}`;
     }
   }
+
+
 }

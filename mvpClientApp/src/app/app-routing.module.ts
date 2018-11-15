@@ -1,12 +1,12 @@
-import { SearchComponent } from './search/search.component';
+import { FollowersComponent } from './followers/followers.component';
+import { FollowingComponent } from './following/following.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from '../app/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PreventChangesGuard } from './_guards/prevent-changes.guard';
-import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,8 +16,10 @@ const routes: Routes = [
   runGuardsAndResolvers: 'always',
   canActivate: [AuthGuard],
   children: [
-    {path:'search', component: SearchComponent}
-  ]
+  {path: 'profile/:id', component: ProfileComponent},
+  {path: 'following', component: FollowingComponent},
+  {path: 'followers', component: FollowersComponent}
+]
 },
 {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

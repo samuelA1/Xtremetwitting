@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { TweetService } from '../_services/tweet.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddAndGetTweetsComponent implements OnInit {
   @ViewChild('f') f: NgForm;
+  @Output() reduce = new EventEmitter();
 token: any;
 tweet: any = {}
 tweets: any[];
@@ -47,6 +48,7 @@ tweets: any[];
         if (tweet['success']) {
           this.f.reset();
           this.alertify.success('Tweet created');
+          this.reduce.emit(1);
         } else {
           this.alertify.error('Unable to create tweet')
         }
@@ -63,6 +65,7 @@ tweets: any[];
       this.userService.deleteTweet(id);
       this.tweets.splice(this.tweets.findIndex(t => t._id === id), 1)
       this.alertify.success('Tweet deleted');
+      this.reduce.emit(-1);
     })
   }
 

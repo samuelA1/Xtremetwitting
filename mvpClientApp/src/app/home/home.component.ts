@@ -1,3 +1,5 @@
+import { UserService } from './../_services/user.service';
+import { AuthService } from './../_services/auth.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -8,11 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 token: any;
-  constructor() { }
+numberOfTweets: number;
+numberOfFollowers: number;
+numberOfFollowing: number;
+  constructor(public authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
+    this.getUserTweets();
 
+  }
+
+  async getUserTweets() {
+    const tweets= await this.userService.getUserTweets();
+    const follow = await this.userService.getUserFollowersFollowing()
+    this.numberOfTweets = tweets['tweets'].length;
+    this.numberOfFollowers = follow['followers'].length;
+    this.numberOfFollowing = follow['following'].length;
+  }
+
+  reduceSomething(model: number) {
+    if(model == -1) {
+      this.numberOfTweets -=1
+    } else if (model == 1) {
+      this.numberOfTweets +=1
+    } else if(model == 2) {
+      this.numberOfFollowing +=1
+    }
   }
 
 }

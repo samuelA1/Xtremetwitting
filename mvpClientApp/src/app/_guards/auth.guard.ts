@@ -14,7 +14,7 @@ constructor(private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,): Observable<boolean> | Promise<boolean> | boolean {
-      const token = localStorage.getItem('token');
+      var token = localStorage.getItem('token');
       if (!this.helper.isTokenExpired(token)) return true;
 
       this.router.navigate(['/login', {returnUrl: state.url}]);

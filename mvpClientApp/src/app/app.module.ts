@@ -20,6 +20,9 @@ import { AddAndGetTweetsComponent } from './addAndGetTweets/addAndGetTweets.comp
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { SearchComponent } from './search/search.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { FollowersComponent } from './followers/followers.component';
+import { FollowingComponent } from './following/following.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
       AddAndGetTweetsComponent,
       TimeAgoPipe,
       SearchComponent,
-      SuggestionsComponent
+      SuggestionsComponent,
+      FollowersComponent,
+      FollowingComponent,
+      ProfileComponent
    ],
    imports: [
       BrowserModule,

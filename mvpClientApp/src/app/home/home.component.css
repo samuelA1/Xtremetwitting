@@ -1,12 +1,12 @@
 
 img {
     border-radius: 50%;
-    width: 40px;
+    width: 80px;
 }
 
 
 
-@media screen and (min-width: 0px) and (max-width: 360px) {
+@media screen and (min-width: 0px) and (max-width: 1023px) {
     .card { display: none; }   
   }
 

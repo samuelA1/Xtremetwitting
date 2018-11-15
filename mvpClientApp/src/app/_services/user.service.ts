@@ -28,4 +28,16 @@ followSomeone(id) {
   return this.http.post(this.apiUrl + 'follow/follow/' + id, {}, {headers: this.headers}).toPromise();
 }
 
+getUserTweets() {
+  return this.http.get(this.apiUrl + 'tweet', {headers: this.headers}).toPromise();
+}
+
+getUserFollowersFollowing() {
+  return this.http.get(this.apiUrl + 'follow/followers/following', {headers: this.headers}).toPromise();
+}
+
+getUser(id) {
+  return this.http.get(this.apiUrl + 'user/' + id, {headers: this.headers}).toPromise();
+}
+
 }
