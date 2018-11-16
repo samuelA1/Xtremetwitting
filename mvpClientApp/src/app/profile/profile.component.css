@@ -10,10 +10,13 @@ img {
     border-radius: 50%;
 }
 
-/* h4:hover {
-    color: #1DA1F2;
-} */
+.card-body-body {
+    width: 510px;
+}
 
+.card-you {
+    width: 510px;
+}
 
 .img-tweet {
     width: 40px;
@@ -21,6 +24,7 @@ img {
 
 .tabChange > h4 {
     color:  #1DA1F2;
+    border-bottom: 3px solid #1DA1F2;
 }
 
 .unChange {
@@ -28,5 +32,9 @@ img {
 }
 
 .btn-outline-primary {
+    border-radius: 100px;
+}
+
+.btn-primary {
     border-radius: 100px;
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../_services/auth.service';
 import { AlertifyService } from './../_services/alertify.service';
 import { UserService } from './../_services/user.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
@@ -8,11 +9,13 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./suggestions.component.css']
 })
 export class SuggestionsComponent implements OnInit {
-  @Input('toRemove') toRemove;
+  @Input('toRemove') toRemove: any;
   @Output() reduce = new EventEmitter();
   suggestions: any[];
 
-  constructor(private userService: UserService, private alertify: AlertifyService) { }
+  constructor(private userService: UserService,
+     private alertify: AlertifyService, 
+     private authService: AuthService) { }
 
   async ngOnInit() {
     const suggestion = await this.userService.getSuggestions();
@@ -28,9 +31,11 @@ export class SuggestionsComponent implements OnInit {
     this.reduce.emit(2);
   }
 
-  filterSuggestions() {
-    if (this.toRemove) {
+  private filterSuggestions() {
+    if (this.toRemove && this.toRemove !== this.authService.user.user._id) {
       this.suggestions.splice(this.suggestions.findIndex( u => u._id == this.toRemove), 1)
+    } else {
+      this.suggestions = this.suggestions
     }
     
   }

@@ -15,35 +15,33 @@
             <div class="list-inline">
                 <img src="{{authService.user?.user.picture}}" alt="{{authService.user?.user.username}}"
                  class="mr-3">
-                 <button *ngIf="authService.user?.user.username" class="btn btn-primary btn-tweet" (click)="open(content)"><strong>Tweet</strong></button>
+                 <button *ngIf="authService.user?.user.username" class="btn btn-primary btn-tweet" (click)="openModal(template)"><strong>Tweet</strong></button>
                  <button class="btn btn-primary btn-tweet" (click)="logout()"><strong>logout</strong></button>
               </div>
           </div>
         </div>
       </header>
 
-      <ng-template #content let-modal>
-          <div class="modal-header text-center">
-            <h4 class="modal-title" id="modal-basic-title">Compose new Tweet</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form #tweetForm="ngForm" id="tweetForm" >
-              <div class="form-group">
-                <div class="input-group">
-                  <textarea name="tweet" cols="10" rows="3" class="form-control"
-                   placeholder="What's happening?" [(ngModel)]="tweet.tweet"></textarea>
-                </div>
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Compose new Tweet</h4>
+          <button type="button" class="btn btn-default" (click)="confirm()" >
+            <span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form #tweetForm ="ngForm" id="tweetForm" >
+            <div class="form-group">
+              <div class="input-group">
+                <textarea name="tweet" cols="10" rows="3" class="form-control"
+                 placeholder="What's happening?" [(ngModel)]="tweet.tweet"></textarea>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button [disabled]="!tweetForm.dirty" form="tweetForm" type="button" class="btn btn-primary"
-             (click)="modal.close('Save click');postTweet()">Save</button>
-          </div>
-        </ng-template>
+            </div>
+          </form>
+          <button [disabled]="!tweetForm.dirty" form="tweetForm" type="button" class="btn btn-primary"
+             (click)="modalRef.hide();postTweet()">Save</button>
+        </div>
+      </ng-template>
             
     <router-outlet></router-outlet>
 </div>
+ 

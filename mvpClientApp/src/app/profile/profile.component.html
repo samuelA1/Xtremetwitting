@@ -2,7 +2,7 @@
     <div class="card-image-top text-center">
         <img src="{{user?.picture}}" alt="{{user?.username}}" class="img-profile">
         <br>
-        <strong class="display-4">{{user?.firstName}} {{user?.lastName}}</strong>
+        <strong class="display-4">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</strong>
         <br>
         <h5 class="text-muted text-center">@{{user?.username}}</h5>
     </div>
@@ -12,7 +12,9 @@
             <small class="list-inline-item mr-3"><strong>Following</strong></small>
             <small class="list-inline-item mr-3"><strong>Followers</strong></small>
             <button *ngIf="toFollow" type="button" class="btn btn-outline-primary float-right mr-5" (click)="follow(user?._id)">Follow</button>
-            <button *ngIf="!toFollow && user?._id != authService.user?.user._id " type="button" class="btn btn-outline-primary float-right mr-5" (click)="follow(user?._id)">Following</button>
+            <button *ngIf="!toFollow && user?._id != authService.user?.user._id " type="button" class="btn btn-primary float-right mr-5"
+             (click)="unfollow(user?._id)" (mouseover)="statusChange='unfollow'" 
+             (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
         </div>
         <div class="list-inline text-center">
           <a class="btn" (click)="change(1)" [ngClass]="tabChange == 1 ? 'tabChange' : 'unChange'"  >
@@ -33,31 +35,35 @@
 <br>
 <div class="container">
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-2"></div>
+    <div class="col-md">
       <div *ngIf="tweets?.length == 0 && tabChange ==1 ">
         <h1>No tweets yet</h1>
       </div>
-        <div *ngIf="tabChange == 1">
-          <div  class="card" *ngFor="let tweet of tweets">
-            <div *ngIf="tabChange ==1" class="card-body list-inline">
-                <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
-                  <img class="list-inline-item img-tweet" src="{{user.picture}}" alt="{{user.username}}"
-                  class="mr-3">
-                </a>
-                <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
-                  <h6 class="card-title list-inline-item">{{user.firstName}} {{user.lastName}}
-                      <strong>@{{user.username}}</strong></h6>
-                </a>
-                <p class="card-text mt-3">{{tweet.tweet}}</p>
-              <small class="text-muted ">{{tweet.dateTweeted | date : 'longDate'}}</small>
-            </div>
-        </div>
+      <div *ngIf="tabChange == 1">
+        <div  class="card card-you" *ngFor="let tweet of tweets">
+          <div *ngIf="tabChange ==1" class="card-body card-body-body list-inline">
+              <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
+                <img class="list-inline-item img-tweet" src="{{user.picture}}" alt="{{user.username}}"
+                class="mr-3">
+              </a>
+              <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
+                <h6 class="card-title list-inline-item">{{user.firstName | titlecase}} {{user.lastName | titlecase}}
+                    <strong>@{{user.username}}</strong></h6>
+              </a>
+              <p class="card-text mt-3">{{tweet.tweet}}</p>
+            <small class="text-muted ">{{tweet.dateTweeted | date : 'longDate'}}</small>
+          </div>
       </div>
-        <div *ngIf="tabChange == 2">2</div>
-        <div *ngIf="tabChange == 3">3</div>
+      </div>
+      <div *ngIf="tabChange == 2">
+        <app-following [userId]="userId"></app-following>
+      </div>
+      <div *ngIf="tabChange == 3">
+          <app-followers [userId]="userId"></app-followers>
+      </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3" *ngIf="tabChange == 1">
         <app-suggestions [toRemove]="userId"></app-suggestions>
     </div>
   </div>

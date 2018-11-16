@@ -1,11 +1,11 @@
-import { NgForm } from '@angular/forms';
 import { TweetService } from './_services/tweet.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
-import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-root',
@@ -13,21 +13,19 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('tweetForm') tweetForm: NgForm
+  modalRef: BsModalRef;
   title = 'twitter';
   token;
   helper = new JwtHelperService();
-  closeResult: string;
   tweet: any = {}
-  modalRef: Promise<void>;
 
 
 
   constructor(private router: Router,
      public authService: AuthService,
       private alertify: AlertifyService,
-      private modalService: NgbModal,
-      private userService: TweetService) {
+      private userService: TweetService,
+      private modalService: BsModalService) {
       this.token = localStorage.getItem('token')
       authService.user = this.helper.decodeToken(this.token)
       authService.text = 'Sign out'
@@ -72,32 +70,22 @@ export class AppComponent {
     }
   }
 
-  open(content) {
-    const options  = {
-      beforeDismiss: () => {
-        this.alertify.confirm('Are you sure you want to discard this tweet?', () => {
-          return false;
-        })
-
-        return true;
-      }
-    };
-    this.modalRef = this.modalService.open(content, options).result.then((result) => {
-      //this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
+  confirm(): void {
+    if (this.tweet.tweet) {
+      this.alertify.confirm('Are you sure you want to discard this tweet?', () => {
+        this.modalRef.hide();
+      })
     } else {
-      return  `with: ${reason}`;
+      this.modalRef.hide();
     }
+    
   }
+
+  
 
 
 }

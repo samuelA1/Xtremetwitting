@@ -31,8 +31,8 @@ router.get('/user/:id', checkJwt, (req, res, next) => {
     .exec((err, user) => {
         if (err) return next(err);
 
-        const numberFollowers = user.following.length;
-        const numberFollowing = user.followers.length;
+        const numberFollowers = user.followers.length;
+        const numberFollowing = user.following.length;
         res.json({
             success: true,
             user: user,

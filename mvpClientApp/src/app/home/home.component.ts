@@ -17,13 +17,13 @@ numberOfFollowing: number;
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
-    this.getUserTweets();
+    this.getUserTweets(this.authService.user.user._id);
 
   }
 
-  async getUserTweets() {
+  async getUserTweets(id) {
     const tweets= await this.userService.getUserTweets();
-    const follow = await this.userService.getUserFollowersFollowing()
+    const follow = await this.userService.getUserFollowersFollowing(id)
     this.numberOfTweets = tweets['tweets'].length;
     this.numberOfFollowers = follow['followers'].length;
     this.numberOfFollowing = follow['following'].length;

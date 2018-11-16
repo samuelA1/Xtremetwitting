@@ -48,6 +48,7 @@ tweets: any[];
         if (tweet['success']) {
           this.f.reset();
           this.alertify.success('Tweet created');
+          localStorage.removeItem('tweet');
           this.reduce.emit(1);
         } else {
           this.alertify.error('Unable to create tweet')
@@ -81,10 +82,21 @@ tweets: any[];
     this.token = localStorage.getItem('token');
     await this.getTweets()
     this.addRecentTweet()
+    this.keepTweet();
   }
 
   addRecentTweet() {
     this.userService.recentTweet.subscribe(tweetObj => this.tweets.unshift(tweetObj))
+  }
+
+  keepTweet() {
+    if (this.tweet.tweet) {
+      localStorage.setItem('tweet', this.tweet.tweet)
+    } else if(this.tweet.tweet == '') {
+      localStorage.setItem('tweet', '')
+    } else {
+      this.tweet.tweet = localStorage.getItem('tweet');
+    }
   }
 
 }

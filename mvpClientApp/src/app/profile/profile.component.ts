@@ -18,17 +18,19 @@ export class ProfileComponent implements OnInit {
   tweets: any[];
   tabChange: any = 1;
   toFollow: boolean;
+  statusChange: string;
 
   constructor(private userService: UserService, 
     private alertify: AlertifyService, 
     private route: ActivatedRoute,
-    private authService: AuthService) { }
-
+    public authService: AuthService) { }
+    
   async ngOnInit() {
     this.route.params.subscribe(res => {this.userId = res['id'];})
     await this.getUser(this.userId);
     this.tabChange = 1;
     this.canFollow();
+    this.statusChange = 'following'
   }
 
   async getUser(id) {
@@ -69,4 +71,9 @@ export class ProfileComponent implements OnInit {
     this.numberOfFollowing += 1;
   }
 
+  async unfollow(id) {
+    await this.userService.unfollowSomeone(id);
+    this.alertify.success('You just unfollowed another user')
+    this.numberOfFollowing -= 1;
+  }
 }

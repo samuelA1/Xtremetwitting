@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   async register () {
     try {
       if (this.loginValidation()) {
-        const user = await this.authService.register(this.user);
+        var user = await this.authService.register(this.user);
         user['success'] ? (this.alertify.success('Registration successful'),
         localStorage.setItem('token', user['token']),
         this.router.navigate(['']))
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
         this.alertify.error('Check your input fields')
           }
     } catch (error) {
-      this.alertify.error('Unable to register. Check your email and password');
+      this.alertify.error(error.message);
     }
   }
 

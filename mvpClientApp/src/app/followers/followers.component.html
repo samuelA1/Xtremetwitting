@@ -1,3 +1,31 @@
-<p>
-  followers works!
-</p>
+<div *ngIf="followers.length == 0">
+  <h1>Not being followered by anyone yet</h1>
+</div>
+<div *ngFor="let follower of followers" class="card mb-3 mr-3" style="width: 18rem; display: inline-block;" (mouseover)="canFollow(follower?._id)">
+    <div *ngIf="follower._id != authService.user?.user._id">
+      <a routerLink="/profile/{{follower?._id}}" routerLinkActive="router-link-active" >
+        <img class="card-img-top" src="{{follower?.picture}}" alt="follower?.username" style="height: 100px;">
+      </a>
+      <div class="card-body">
+        <button *ngIf="toFollow" type="button" class="btn btn-outline-primary float-right mr-5" (click)="follow(follower?._id)">Follow</button>
+        <button *ngIf="!toFollow && follower?._id != authService.user?.user._id " type="button" class="btn btn-primary float-right mr-5"
+         (click)="unfollow(follower?._id)" (mouseover)="statusChange='unfollow'" 
+         (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
+          <a routerLink="/profile/{{follower?._id}}" routerLinkActive="router-link-active" >
+            <strong>{{follower?.firstName | titlecase}} {{follower?.lastName | titlecase}}</strong>
+          </a>
+          <br>
+          <small class="text-muted text-center">@{{follower?.username}}</small>
+        <div class="list-inline text-center">
+          <small class="list-inline-item mr-3"><strong>Tweets</strong></small>
+          <small class="list-inline-item mr-3"><strong>Following</strong></small>
+          <small class="list-inline-item mr-3"><strong>Followers</strong></small>
+        </div>
+        <div class="list-inline text-center">
+          <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfTweets}}</h4>
+          <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowing}}</h4>
+          <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowers}}</h4>
+        </div>
+      </div>
+    </div>
+</div>

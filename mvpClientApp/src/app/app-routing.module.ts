@@ -17,8 +17,6 @@ const routes: Routes = [
   canActivate: [AuthGuard],
   children: [
   {path: 'profile/:id', component: ProfileComponent},
-  {path: 'following', component: FollowingComponent},
-  {path: 'followers', component: FollowersComponent}
 ]
 },
 {path: '**', redirectTo: '', pathMatch: 'full'}

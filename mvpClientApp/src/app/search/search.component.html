@@ -4,12 +4,10 @@
         <input [(ngModel)]="searchTweet.search" name="search" (keyup)="search()" type="text" id="dropdownBasic1" ngbDropdownToggle class="form-control" placeholder="Search...">
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <div *ngFor="let user of users" class="ml-2">
-              <a routerLink="/profile/{{user?._id}}" routerLinkActive="router-link-active" >
-                <img class="list-inline-item" src="{{user?.picture}}" alt="{{user?.username}}"
+              <img class="list-inline-item" src="{{user?.picture}}" alt="{{user?.username}}"
               class="mr-3">
             <h6 class="card-title list-inline-item">{{user?.firstName}} {{user?.lastName}}
-              <strong>@{{user?.username}}</strong></h6>
-              </a>
+              <strong class="mr-5">@{{user?.username}}</strong></h6>
               <hr>
           </div>
           <small class="text-muted ml-4">Search all people for <strong>{{searchTweet.search}}</strong></small>

@@ -59,10 +59,11 @@ router.post('/unfollow/:id', checkJwt, (req, res, next) => {
     ])
 })
 
-router.get('/followers/following', checkJwt, (req, res, next) => {
+router.get('/followers/following/:id', checkJwt, (req, res, next) => {
+    var userId = req.params.id;
     const following = [];
     const followers = [];
-    User.findOne({_id: req.decoded.user._id})
+    User.findOne({_id: userId})
     .populate('following')
     .populate('followers')
     .exec((err, user) => {
@@ -70,6 +71,7 @@ router.get('/followers/following', checkJwt, (req, res, next) => {
 
         user.following.forEach(elt => {
             following.push({
+                _id: elt._id,
                 username: elt.username,
                 firstName: elt.firstName,
                 lastName: elt.lastName,
@@ -79,6 +81,7 @@ router.get('/followers/following', checkJwt, (req, res, next) => {
 
         user.followers.forEach(elt => {
             followers.push({
+                _id: elt._id,
                 username: elt.username,
                 firstName: elt.firstName,
                 lastName: elt.lastName,

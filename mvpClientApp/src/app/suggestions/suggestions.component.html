@@ -9,7 +9,7 @@
         </div>
        <div class="float-left">
           <a routerLink="/profile/{{user?._id}}" routerLinkActive="router-link-active" >
-            <h6 class="card-title list-inline-item">{{user?.firstName}} {{user?.lastName}}
+            <h6 class="card-title list-inline-item">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}
             <strong>@{{user?.username}}</strong></h6>
           </a>
           <br>

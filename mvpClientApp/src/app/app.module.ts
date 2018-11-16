@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PreventChangesGuard } from './_guards/prevent-changes.guard';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,7 +46,8 @@ import { ProfileComponent } from './profile/profile.component';
       AppRoutingModule,
       FormsModule,
       HttpClientModule,
-      NgbModule
+      NgbModule,
+      ModalModule.forRoot()
    ],
    providers: [
       AuthService,

@@ -4,7 +4,7 @@
     <form #f="ngForm" (ngSubmit)="postTweet()" class="text-center">
       <div class="form-group ">
           <label for="tweet">What's on your mind?<textarea name="tweet" class="form-control" id="tweet" 
-            rows="1" [(ngModel)]="tweet.tweet">
+            rows="1" [(ngModel)]="tweet.tweet" (keyup)="keepTweet()">
           </textarea>
           </label>
       </div>
@@ -23,7 +23,7 @@
           class="mr-3">
         </a>
         <a routerLink="/profile/{{tweet.owner?._id}}" routerLinkActive="router-link-active" >
-          <h6 class="card-title list-inline-item">{{tweet.owner?.firstName}} {{tweet.owner?.lastName}}
+          <h6 class="card-title list-inline-item">{{tweet.owner?.firstName | titlecase}} {{tweet.owner?.lastName | titlecase}}
               <strong>@{{tweet.owner?.username}}</strong></h6>
         </a>
         <p class="card-text mt-3">{{tweet.tweet}}</p>

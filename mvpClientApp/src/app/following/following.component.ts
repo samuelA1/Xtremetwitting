@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../_services/auth.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserService } from '../_services/user.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-following',
@@ -6,10 +9,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./following.component.css']
 })
 export class FollowingComponent implements OnInit {
+  followings: any[];
+  statusChange: string;
+  @Input() userId: any
 
-  constructor() { }
 
-  ngOnInit() {
+  constructor(private userService: UserService, 
+    private alertify: AlertifyService, 
+    public authService: AuthService) { }
+
+  async getFollowing(id) {
+    const follow = await this.userService.getUserFollowersFollowing(id)
+    this.followings = follow['following'];
+  }
+
+  async ngOnInit() {
+    await this.getFollowing(this.userId);
+    this.statusChange = 'following';
+  }
+
+  async follow(id) {
+    await this.userService.followSomeone(id);
+    this.alertify.success('You just followed another user')
+    this.followings.splice(this.followings.findIndex(u => u._id == id), 1);
+  }
+
+  async unfollow(id) {
+    await this.userService.unfollowSomeone(id);
+    this.alertify.success('You just unfollowed another user')
+    this.followings.splice(this.followings.findIndex(u => u._id == id), 1);
   }
 
 }
