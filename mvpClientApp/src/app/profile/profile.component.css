@@ -38,3 +38,9 @@ img {
 .btn-primary {
     border-radius: 100px;
 }
+
+.clearfix { 
+    display: block; 
+    height: 0; 
+    clear: both;
+ }

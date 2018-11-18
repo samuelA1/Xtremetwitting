@@ -11,10 +11,12 @@
             <small class="list-inline-item mr-3"><strong>Tweets</strong></small>
             <small class="list-inline-item mr-3"><strong>Following</strong></small>
             <small class="list-inline-item mr-3"><strong>Followers</strong></small>
-            <button *ngIf="toFollow" type="button" class="btn btn-outline-primary float-right mr-5" (click)="follow(user?._id)">Follow</button>
-            <button *ngIf="!toFollow && user?._id != authService.user?.user._id " type="button" class="btn btn-primary float-right mr-5"
-             (click)="unfollow(user?._id)" (mouseover)="statusChange='unfollow'" 
-             (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
+        </div>
+        <div class="float-right clearfix mr-5">
+          <button *ngIf="toFollow" type="button" class="btn btn-outline-primary  " (click)="follow(user?._id)">Follow</button>
+          <button *ngIf="!toFollow && user?._id != authService.user?.user._id " type="button" class="btn btn-primary  "
+            (click)="unfollow(user?._id)" (mouseover)="statusChange='unfollow'" 
+            (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
         </div>
         <div class="list-inline text-center">
           <a class="btn" (click)="change(1)" [ngClass]="tabChange == 1 ? 'tabChange' : 'unChange'"  >
@@ -31,7 +33,6 @@
         </div>
     </div>
 </div>
-
 <br>
 <div class="container">
   <div class="row">
