@@ -32,12 +32,16 @@ export class FollowersComponent implements OnInit {
     await this.userService.followSomeone(id);
     this.alertify.success('You just followed another user')
     this.toReduce.emit(1);
+    var found = this.followers.find(u => u._id == id);
+    this.followers.push(Object.assign(found, {both: true}));
   }
 
   async unfollow(id) {
     await this.userService.unfollowSomeone(id);
     this.alertify.success('You just unfollowed another user');
     this.toReduce.emit(-1);
+    var found = this.followers.find(u => u._id == id);
+    this.followers.push(Object.assign(found, {both: false}));
   }
 
   route() {
