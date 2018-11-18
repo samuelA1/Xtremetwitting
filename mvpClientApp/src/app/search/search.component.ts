@@ -24,4 +24,8 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  route() {
+    window.location.reload();
+  }
+
 }

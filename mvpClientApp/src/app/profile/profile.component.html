@@ -1,74 +1,118 @@
-<div class="card">
-    <div class="card-image-top text-center">
-        <img src="{{user?.picture}}" alt="{{user?.username}}" class="img-profile">
-        <br>
-        <strong class="display-4">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</strong>
-        <br>
-        <h5 class="text-muted text-center">@{{user?.username}}</h5>
-    </div>
-    <div class="card-header">
-        <div class="list-inline text-center">
-            <small class="list-inline-item mr-3"><strong>Tweets</strong></small>
-            <small class="list-inline-item mr-3"><strong>Following</strong></small>
-            <small class="list-inline-item mr-3"><strong>Followers</strong></small>
+<div style="background-color: #E8F5FD">
+    <div class="card">
+        <div class="card-image-top text-center">
+            <img src="{{user?.picture}}" alt="{{user?.username}}" class="img-profile">
+            <br>
+            <strong class="display-4">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</strong>
+            <br>
+            <h5 class="text-muted text-center">@{{user?.username}}</h5>
         </div>
-        <div class="float-right clearfix mr-5">
-          <button *ngIf="toFollow" type="button" class="btn btn-outline-primary  " (click)="follow(user?._id)">Follow</button>
-          <button *ngIf="!toFollow && user?._id != authService.user?.user._id " type="button" class="btn btn-primary  "
-            (click)="unfollow(user?._id)" (mouseover)="statusChange='unfollow'" 
-            (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
-        </div>
-        <div class="list-inline text-center">
-          <a class="btn" (click)="change(1)" [ngClass]="tabChange == 1 ? 'tabChange' : 'unChange'"  >
-            <h4  class="list-inline-item mr-3">{{numberOfTweets}}</h4>
-          </a>
-          <a class="btn" (click)="change(2)" [ngClass]="tabChange == 2 ? 'tabChange' : 'unChange'">
-            <h4  class="list-inline-item ml-2">
-              {{numberOfFollowing}}</h4>
-          </a>
-          <a  class="btn" (click)="change(3)" [ngClass]="tabChange == 3 ? 'tabChange' : 'unChange'">
-            <h4  class="list-inline-item ml-5">
-              {{numberOfFollowers}}</h4>
-          </a>
-        </div>
-    </div>
-</div>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md">
-      <div *ngIf="tweets?.length == 0 && tabChange ==1 ">
-        <h1>No tweets yet</h1>
-      </div>
-      <div *ngIf="tabChange == 1">
-        <div  class="card card-you" *ngFor="let tweet of tweets">
-          <div *ngIf="tabChange ==1" class="card-body card-body-body list-inline">
-              <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
-                <img class="list-inline-item img-tweet" src="{{user.picture}}" alt="{{user.username}}"
-                class="mr-3">
+        <div class="card-header">
+            <div class="list-inline text-center">
+                <small class="list-inline-item mr-3"><strong>Tweets</strong></small>
+                <small class="list-inline-item mr-3"><strong>Following</strong></small>
+                <small class="list-inline-item mr-3"><strong>Followers</strong></small>
+            </div>
+            <div class="float-right clearfix mr-5">
+              <button *ngIf="toFollow" type="button" class="btn btn-outline-primary  " (click)="follow(user?._id)">Follow</button>
+              <button *ngIf="user?._id == authService.user?.user._id" type="button" class="btn btn-outline-secondary" 
+              (click)="openModal(template)">Edit profile</button>
+              <button *ngIf="!toFollow && user?._id != authService.user?.user._id " type="button" class="btn btn-primary  "
+                (click)="unfollow(user?._id)" (mouseover)="statusChange='unfollow'" 
+                (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
+            </div>
+            <div class="list-inline text-center">
+              <a class="btn" (click)="change(1)" [ngClass]="tabChange == 1 ? 'tabChange' : 'unChange'"  >
+                <h4  class="list-inline-item mr-3">{{numberOfTweets}}</h4>
               </a>
-              <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
-                <h6 class="card-title list-inline-item">{{user.firstName | titlecase}} {{user.lastName | titlecase}}
-                    <strong>@{{user.username}}</strong></h6>
+              <a class="btn" (click)="change(2)" [ngClass]="tabChange == 2 ? 'tabChange' : 'unChange'">
+                <h4  class="list-inline-item ml-2">
+                  {{numberOfFollowing}}</h4>
               </a>
-              <p class="card-text mt-3">{{tweet.tweet}}</p>
-            <small class="text-muted ">{{tweet.dateTweeted | date : 'longDate'}}</small>
+              <a  class="btn" (click)="change(3)" [ngClass]="tabChange == 3 ? 'tabChange' : 'unChange'">
+                <h4  class="list-inline-item ml-5">
+                  {{numberOfFollowers}}</h4>
+              </a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+            <p class="text-muted">{{user?.profile.bio | titlecase}}</p>
+            <p class="text-muted"><i class="fas fa-map-marker-alt mr-2">
+              {{user?.profile.location | titlecase}}</i></p>
+            <p class="text-muted"><i class="far fa-calendar-alt">
+                Joined {{user?.dateCreated | date : 'longDate'}}</i></p>
+        </div>
+        <div class="col-md">
+          <div *ngIf="tweets?.length == 0 && tabChange ==1 ">
+            <h1>No tweets yet</h1>
           </div>
-      </div>
-      </div>
-      <div *ngIf="tabChange == 2">
-        <app-following [userId]="userId" (toReduce) =reduce($event)></app-following>
-      </div>
-      <div *ngIf="tabChange == 3">
-          <app-followers [userId]="userId" (toReduce) =reduce($event)></app-followers>
+          <div *ngIf="tabChange == 1">
+            <div  class="card card-you" *ngFor="let tweet of tweets">
+              <div *ngIf="tabChange ==1" class="card-body card-body-body list-inline">
+                  <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
+                    <img class="list-inline-item img-tweet" src="{{user.picture}}" alt="{{user.username}}"
+                    class="mr-3">
+                  </a>
+                  <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
+                    <h6 class="card-title list-inline-item">{{user.firstName | titlecase}} {{user.lastName | titlecase}}
+                        <strong>@{{user.username}}</strong></h6>
+                  </a>
+                  <p class="card-text mt-3">{{tweet.tweet}}</p>
+                <small class="text-muted ">{{tweet.dateTweeted | date : 'longDate'}}</small>
+              </div>
+          </div>
+          </div>
+          <div *ngIf="tabChange == 2">
+            <app-following [userId]="userId" (toReduce) =reduce($event)></app-following>
+          </div>
+          <div *ngIf="tabChange == 3">
+              <app-followers [userId]="userId" (toReduce) =reduce($event)></app-followers>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="tabChange == 1" >
+            <app-suggestions [toRemove]="userId"></app-suggestions>
+        </div>
       </div>
     </div>
-    <div class="col-md-3" *ngIf="tabChange == 1">
-        <app-suggestions [toRemove]="userId"></app-suggestions>
-    </div>
-  </div>
 </div>
+
+
+<!-- Modal window -->
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Compose new Tweet</h4>
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+      <form #profileForm ="ngForm" id="profileForm" >
+        <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First name" name="firstName" [(ngModel)]="profile.firstName">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Last name" name="lastName" [(ngModel)]="profile.lastName">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Bio" name="bio" [(ngModel)]="profile.bio">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Location" name="location" [(ngModel)]="profile.location">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Website" name="website" [(ngModel)]="profile.website">
+          </div>
+      </form>
+      <button [disabled]="!profileForm.dirty" form="profileForm" type="button" class="btn btn-primary"
+         (click)="modalRef.hide();updateProfile()">Save</button>
+    </div>
+  </ng-template>
 
 
 

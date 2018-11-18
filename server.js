@@ -2,11 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const request = require('request')
 const config = require('./config');
 const homeRoute = require('./routes/home')
 const authRoute = require('./routes/auth');
 const followRoute = require('./routes/follow')
+const profileRoute = require('./routes/profile');
 const cors = require('cors');
 
 const app = express();
@@ -27,6 +27,7 @@ app.use(morgan('dev'));
 app.use('/api', homeRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/follow', followRoute);
+app.use('/api/profile', profileRoute);
 
 app.listen(config.port, err => {
     err ? console.log(err) : console.log('success');

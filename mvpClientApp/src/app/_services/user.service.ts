@@ -44,4 +44,7 @@ getUser(id) {
   return this.http.get(this.apiUrl + 'user/' + id, {headers: this.headers}).toPromise();
 }
 
+upDateProfile(profile: any) {
+  return this.http.post(this.apiUrl + 'profile/profile', profile, {headers: this.headers}).toPromise();
+}
 }

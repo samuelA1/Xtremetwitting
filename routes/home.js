@@ -26,7 +26,6 @@ router.get('/users', checkJwt, (req, res, next) => {
 router.get('/user/:id', checkJwt, (req, res, next) => {
     const userId = req.params.id;
     User.findOne({_id: userId})
-    .select(['username', 'firstName', 'lastName', 'following', 'followers', 'picture', 'tweets'])
     .populate('tweets')
     .exec((err, user) => {
         if (err) return next(err);

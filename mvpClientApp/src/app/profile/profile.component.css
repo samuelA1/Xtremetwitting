@@ -11,11 +11,11 @@ img {
 }
 
 .card-body-body {
-    width: 510px;
+    width: 410px;
 }
 
 .card-you {
-    width: 510px;
+    width: 410px;
 }
 
 .img-tweet {
@@ -31,11 +31,7 @@ img {
     color: black;
 }
 
-.btn-outline-primary {
-    border-radius: 100px;
-}
-
-.btn-primary {
+.btn-primary, .btn-outline-primary, .btn-outline-secondary {
     border-radius: 100px;
 }
 

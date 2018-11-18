@@ -13,9 +13,15 @@ const UserSchema = new Schema({
     email: {type: String, unique: true, lowercase: true},
     password: String,
     picture: String,
+    profile: {
+        bio: {type: String, lowercase: true},
+        location: {type: String, lowercase: true},
+        website: {type: String, lowercase: true},
+    },
+    dateCreated: {type: Date, default: new Date().toISOString().slice(0, 10)},
     tweets: [{type: Schema.Types.ObjectId, ref: 'Tweet'}],
     following: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    followers: [{type: Schema.Types.ObjectId, ref: 'User'}]
+    followers: [{type: Schema.Types.ObjectId, ref: 'User'}],
 })
 
 UserSchema.pre('save', function(next) {
