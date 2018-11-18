@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         location: {type: String, lowercase: true, default: ''},
         website: {type: String, lowercase: true, default: ''},
     },
-    dateCreated: {type: Date, default: new Date().toISOString().slice(0, 10)},
+    dateCreated: {type: Date, default: Date.now},
     tweets: [{type: Schema.Types.ObjectId, ref: 'Tweet'}],
     following: [{type: Schema.Types.ObjectId, ref: 'User'}],
     followers: [{type: Schema.Types.ObjectId, ref: 'User'}],

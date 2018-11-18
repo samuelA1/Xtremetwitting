@@ -24,10 +24,11 @@ tweets: any[];
 
   async getTweets() {
     try {
-      const tweets = await this.userService.getTweets();
-      const recentTweets = await this.userService.getUserRecentTweets();
+      var tweets = await this.userService.getTweets();
+      var recentTweets = await this.userService.getUserRecentTweets();
       if (tweets['success']) {
-        this.tweets = tweets['tweets'].concat(recentTweets['tweets'])
+        var huge = tweets['tweets'].concat(recentTweets['tweets']);
+        this.tweets = huge.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } )
       } else {
         this.alertify.message('No tweets')
       }

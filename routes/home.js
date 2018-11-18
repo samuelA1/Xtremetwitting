@@ -138,11 +138,9 @@ router.route('/tweet')
             .exec((err, user) => {
                 if (err) return next(err);
 
-                var date = new Date().toISOString().slice(0, 10);
-                const userRecentTweets = user.tweets.filter(elt => elt.dateTweeted = date);
                 res.json({
                     success: true,
-                    tweets: userRecentTweets,
+                    tweets: user.tweets.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } )
                 })
 
             })

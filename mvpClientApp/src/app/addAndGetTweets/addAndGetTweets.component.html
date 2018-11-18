@@ -27,7 +27,7 @@
               <strong>@{{tweet.owner?.username}}</strong></h6>
         </a>
         <p class="card-text mt-3">{{tweet.tweet}}</p>
-      <small class="text-muted ">{{tweet.dateTweeted | date : 'longDate'}}</small>
+      <small class="text-muted ">{{tweet.dateTweeted | timeAgo}}</small>
       <button *ngIf="tweet.owner?.username == authService.user.user.username"
        class="btn btn-danger btn-sm  float-right" type="button" (click)="deleteTweet(tweet._id)">Delete</button>
     </div>
