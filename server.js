@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const path = require('path');
 const config = require('./config');
 const homeRoute = require('./routes/home')
 const authRoute = require('./routes/auth');
@@ -28,6 +29,13 @@ app.use('/api', homeRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/follow', followRoute);
 app.use('/api/profile', profileRoute);
+
+// Set Static Folder
+app.use(express.static(path.join(__dirname, './public')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+  });
 
 app.listen(config.port, err => {
     err ? console.log(err) : console.log('success');
