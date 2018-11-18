@@ -40,9 +40,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-            <p class="text-muted">{{user?.profile.bio | titlecase}}</p>
-            <p class="text-muted"><i class="fas fa-map-marker-alt mr-2">
-              {{user?.profile.location | titlecase}}</i></p>
+            <p class="text-muted">{{user?.profile?.bio | titlecase}}</p>
+            <p *ngIf="user.profile.location" class="text-muted"><i class="fas fa-map-marker-alt mr-2">
+              {{user?.profile?.location | titlecase}}</i></p>
             <p class="text-muted"><i class="far fa-calendar-alt">
                 Joined {{user?.dateCreated | date : 'longDate'}}</i></p>
         </div>

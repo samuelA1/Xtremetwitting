@@ -16,3 +16,14 @@ textarea{
     border-radius: 30px;
     width: 300px;
 }
+
+img:hover {
+    cursor: pointer;
+}
+
+.tooltip-inner {
+    background-color: white;
+    color: black;
+    max-width: 400px;
+    margin: 5px;
+}

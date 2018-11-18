@@ -9,19 +9,19 @@
                <circle cx="12" cy="13" r="4"></circle></svg>
               <strong>Twitter</strong>
             </a>
-            <div>
+            <div *ngIf="authService.user?.user.username">
               <app-search></app-search>
             </div>
             <div class="list-inline">
                 <img src="{{authService.user?.user.picture}}" alt="{{authService.user?.user.username}}"
-                 class="mr-3">
-                 <button *ngIf="authService.user?.user.username" class="btn btn-primary btn-tweet" (click)="openModal(template)"><strong>Tweet</strong></button>
-                 <button class="btn btn-primary btn-tweet" (click)="logout()"><strong>logout</strong></button>
-              </div>
+                      class="mr-3" id="dropdownBasic1" [ngbTooltip]="tipContent" placement="bottom" triggers="click" [autoClose]="true">
+              <button *ngIf="authService.user?.user.username" class="btn btn-primary btn-tweet" (click)="openModal(template)"><strong>Tweet</strong></button>
+            </div>
           </div>
         </div>
       </header>
 
+      <!-- Modal template -->
       <ng-template #template>
         <div class="modal-header">
           <h4 class="modal-title pull-left">Compose new Tweet</h4>
@@ -39,6 +39,19 @@
           </form>
           <button [disabled]="!tweetForm.dirty" form="tweetForm" type="button" class="btn btn-primary"
              (click)="modalRef.hide();postTweet()">Save</button>
+        </div>
+      </ng-template>
+
+      <!-- Tooltip template -->
+      <ng-template #tipContent>
+        <div class="tooltip-inner">
+            <p><strong>{{authService.user?.user.firstName | titlecase}}  {{authService.user?.user.lastName | titlecase}}</strong></p>
+            <p class="text-muted">@{{authService.user?.user.username}}</p>
+            <hr>
+            <a [routerLink]="['/profile',authService.user?.user._id]" routerLinkActive="router-link-active" >
+              <p><i class="far fa-user"></i> Profile</p>
+            </a>
+            <a *ngIf="authService.user?.user.username" (click)="logout()" style="cursor: pointer"><i class="fas fa-door-open"></i> logout</a>
         </div>
       </ng-template>
             

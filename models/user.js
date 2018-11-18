@@ -14,9 +14,9 @@ const UserSchema = new Schema({
     password: String,
     picture: String,
     profile: {
-        bio: {type: String, lowercase: true},
-        location: {type: String, lowercase: true},
-        website: {type: String, lowercase: true},
+        bio: {type: String, lowercase: true, default: ''},
+        location: {type: String, lowercase: true, default: ''},
+        website: {type: String, lowercase: true, default: ''},
     },
     dateCreated: {type: Date, default: new Date().toISOString().slice(0, 10)},
     tweets: [{type: Schema.Types.ObjectId, ref: 'Tweet'}],

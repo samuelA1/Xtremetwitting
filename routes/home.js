@@ -76,6 +76,8 @@ router.route('/tweet')
 
             res.json({
                 success: true,
+                bio: user.profile.bio,
+                location: user.profile.location,
                 tweets: user.tweets
             })
         })

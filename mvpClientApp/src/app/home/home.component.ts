@@ -13,18 +13,24 @@ token: any;
 numberOfTweets: number;
 numberOfFollowers: number;
 numberOfFollowing: number;
+bio: any;
+location: any;
   constructor(public authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
-    this.getUserTweets(this.authService.user.user._id);
-
+    if (this.authService.user) {
+      this.getUserTweets(this.authService.user.user._id);
+    }
+    
   }
 
   async getUserTweets(id) {
     const tweets= await this.userService.getUserTweets();
     const follow = await this.userService.getUserFollowersFollowing(id)
     this.numberOfTweets = tweets['tweets'].length;
+    this.bio = tweets['bio']
+    this.location = tweets['location']
     this.numberOfFollowers = follow['followers'].length;
     this.numberOfFollowing = follow['following'].length;
   }

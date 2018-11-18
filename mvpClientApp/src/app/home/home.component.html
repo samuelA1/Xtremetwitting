@@ -53,9 +53,9 @@
                 </div>
                 <div class="card mt-5" style="width: 16rem;background-color: #E8F5FD">
                     <div class="card-body">
-                        <p class="text-muted">{{authService.user?.user.profile.bio | titlecase}}</p>
-                        <p class="text-muted"><i class="fas fa-map-marker-alt mr-3">
-                          {{authService.user?.user.profile.location | titlecase}}</i></p>
+                        <p *ngIf="bio" class="text-muted">{{bio | titlecase}}</p>
+                        <p *ngIf="location" class="text-muted"><i class="fas fa-map-marker-alt mr-3">
+                          {{location | titlecase}}</i></p>
                         <p class="text-muted"><i class="far fa-calendar-alt mr-3">
                             Joined {{authService.user?.user.dateCreated | date : 'longDate'}}</i></p>
                     </div>
