@@ -9,9 +9,9 @@ import { AlertifyService } from '../_services/alertify.service';
   styleUrls: ['./following.component.css']
 })
 export class FollowingComponent implements OnInit {
-  followings: any[];
-  statusChange: string;
+  @Output() toReduce = new EventEmitter();
   @Input() userId: any
+  followings: any[];
 
 
   constructor(private userService: UserService, 
@@ -25,19 +25,17 @@ export class FollowingComponent implements OnInit {
 
   async ngOnInit() {
     await this.getFollowing(this.userId);
-    this.statusChange = 'following';
-  }
-
-  async follow(id) {
-    await this.userService.followSomeone(id);
-    this.alertify.success('You just followed another user')
-    this.followings.splice(this.followings.findIndex(u => u._id == id), 1);
   }
 
   async unfollow(id) {
     await this.userService.unfollowSomeone(id);
-    this.alertify.success('You just unfollowed another user')
-    this.followings.splice(this.followings.findIndex(u => u._id == id), 1);
+    this.alertify.success('You just unfollowed another user');
+    this.followings.splice(this.followings.findIndex(u=>u._id == id), 1);
+    this.toReduce.emit(-1);
+  }
+
+  route() {
+    window.location.reload();
   }
 
 }

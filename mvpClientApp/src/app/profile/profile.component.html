@@ -57,10 +57,10 @@
       </div>
       </div>
       <div *ngIf="tabChange == 2">
-        <app-following [userId]="userId"></app-following>
+        <app-following [userId]="userId" (toReduce) =reduce($event)></app-following>
       </div>
       <div *ngIf="tabChange == 3">
-          <app-followers [userId]="userId"></app-followers>
+          <app-followers [userId]="userId" (toReduce) =reduce($event)></app-followers>
       </div>
     </div>
     <div class="col-md-3" *ngIf="tabChange == 1">

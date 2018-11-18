@@ -40,6 +40,10 @@ export class SuggestionsComponent implements OnInit {
     
   }
 
+  route() {
+    window.location.reload();
+  }
+
 
 
 }

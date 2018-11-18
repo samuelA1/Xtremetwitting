@@ -61,8 +61,8 @@ router.post('/unfollow/:id', checkJwt, (req, res, next) => {
 
 router.get('/followers/following/:id', checkJwt, (req, res, next) => {
     var userId = req.params.id;
-    const following = [];
-    const followers = [];
+    var following = [];
+    var followers = [];
     User.findOne({_id: userId})
     .populate('following')
     .populate('followers')
@@ -75,7 +75,10 @@ router.get('/followers/following/:id', checkJwt, (req, res, next) => {
                 username: elt.username,
                 firstName: elt.firstName,
                 lastName: elt.lastName,
-                picture: elt.picture
+                picture: elt.picture,
+                following: elt.following,
+                followers: elt.followers,
+                tweets: elt.tweets
             })
         })
 
@@ -85,9 +88,27 @@ router.get('/followers/following/:id', checkJwt, (req, res, next) => {
                 username: elt.username,
                 firstName: elt.firstName,
                 lastName: elt.lastName,
-                picture: elt.picture
+                picture: elt.picture,
+                following: elt.following,
+                followers: elt.followers,
+                tweets: elt.tweets
             })
         })
+
+        for (let i = 0; i < followers.length; i++) {
+            if(filter(followers[i])) {
+                Object.assign(followers[i], {both: true})
+            } else {
+                Object.assign(followers[i], {both: false})
+            }
+            
+        }
+
+        function filter(e) {
+             return following.some((u) => {
+                  return u.username == e.username
+            })
+        }
 
 
         res.json({

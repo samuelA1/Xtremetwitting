@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit {
     
   async ngOnInit() {
     this.route.params.subscribe(res => {this.userId = res['id'];})
+    this.route.params.subscribe(res => {this.tabChange = res['change'] || 1 });
     await this.getUser(this.userId);
-    this.tabChange = 1;
     this.canFollow();
     this.statusChange = 'following'
   }
@@ -75,5 +75,13 @@ export class ProfileComponent implements OnInit {
     await this.userService.unfollowSomeone(id);
     this.alertify.success('You just unfollowed another user')
     this.numberOfFollowing -= 1;
+  }
+
+  reduce(model: number) {
+    if (model == -1) {
+      this.numberOfFollowing -= 1;
+    } else if(model == 1) {
+      this.numberOfFollowing +=1;
+    }
   }
 }

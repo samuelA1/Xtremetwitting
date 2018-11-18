@@ -1,17 +1,20 @@
-<div *ngIf="followers.length == 0">
+<div *ngIf="followers.length === 0">
   <h1>Not being followered by anyone yet</h1>
 </div>
-<div *ngFor="let follower of followers" class="card mb-3 mr-3" style="width: 18rem; display: inline-block;" (mouseover)="canFollow(follower?._id)">
+<div *ngFor="let follower of followers" class="card mb-3 mr-3" style="width: 18rem; display: inline-block;" 
+      >
+    <div *ngIf="followers.length == 1 && follower._id == authService.user?.user._id">
+        <h1>You're the user following him</h1>
+    </div>
     <div *ngIf="follower._id != authService.user?.user._id">
-      <a routerLink="/profile/{{follower?._id}}" routerLinkActive="router-link-active" >
+      <a routerLink="/profile/{{follower?._id}}" routerLinkActive="router-link-active" (click)="route()">
         <img class="card-img-top" src="{{follower?.picture}}" alt="follower?.username" style="height: 100px;">
       </a>
       <div class="card-body">
-        <button *ngIf="toFollow" type="button" class="btn btn-outline-primary float-right mr-5" (click)="follow(follower?._id)">Follow</button>
-        <button *ngIf="!toFollow && follower?._id != authService.user?.user._id " type="button" class="btn btn-primary float-right mr-5"
-         (click)="unfollow(follower?._id)" (mouseover)="statusChange='unfollow'" 
-         (mouseleave)="statusChange='following'">{{statusChange | titlecase}}</button>
-          <a routerLink="/profile/{{follower?._id}}" routerLinkActive="router-link-active" >
+          <button *ngIf="follower?.both" type="button" class="btn btn-primary float-right mr-5" (click)="unfollow(follower?._id)">unfollow</button>
+          <button *ngIf="!follower?.both && authService.user?.user._id == userId" type="button" class="btn btn-outline-primary float-right mr-5"
+          (click)="follow(follower?._id)">follow</button>
+          <a routerLink="/profile/{{follower?._id}}" routerLinkActive="router-link-active" (click)="route()">
             <strong>{{follower?.firstName | titlecase}} {{follower?.lastName | titlecase}}</strong>
           </a>
           <br>
@@ -22,10 +25,11 @@
           <small class="list-inline-item mr-3"><strong>Followers</strong></small>
         </div>
         <div class="list-inline text-center">
-          <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfTweets}}</h4>
-          <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowing}}</h4>
-          <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowers}}</h4>
+            <h4 class="list-inline-item mr-5">{{follower?.tweets?.length}}</h4>
+            <h4 class="list-inline-item mr-5">{{follower?.following?.length}}</h4>
+            <h4 class="list-inline-item mr-5">{{follower?.followers?.length}}</h4>
         </div>
+        <small class="text-center text-muted">Follows you</small>
       </div>
     </div>
 </div>

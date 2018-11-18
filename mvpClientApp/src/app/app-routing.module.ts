@@ -1,5 +1,3 @@
-import { FollowersComponent } from './followers/followers.component';
-import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
