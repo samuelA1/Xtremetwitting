@@ -35,6 +35,7 @@ router.get('/user/:id', checkJwt, (req, res, next) => {
         res.json({
             success: true,
             user: user,
+            tweets: user.tweets.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } ),
             numFollowers: numberFollowers,
             numFollowing: numberFollowing
         })
