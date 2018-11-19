@@ -1332,7 +1332,7 @@ var FollowingComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\nimg {\r\n    border-radius: 50%;\r\n    width: 80px;\r\n}\r\n\r\n\r\n\r\n@media screen and (min-width: 0px) and (max-width: 1023px) {\r\n    .card { display: none; }   \r\n  }\r\n\r\n"
+module.exports = "\r\nimg {\r\n    border-radius: 50%;\r\n    width: 80px;\r\n}\r\n\r\n\r\n\r\n@media screen and (min-width: 0px) and (max-width: 1023px) {\r\n    .card { display: none; margin-left: 6px; }   \r\n  }\r\n\r\n"
 
 /***/ }),
 
