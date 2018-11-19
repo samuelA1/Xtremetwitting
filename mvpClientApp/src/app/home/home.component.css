@@ -7,6 +7,6 @@ img {
 
 
 @media screen and (min-width: 0px) and (max-width: 1023px) {
-    .card { display: none; margin-left: 8px; }   
+    .card { display: none;}   
   }
 
