@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
           location: user['user'].profile.location,
           website: user['user'].profile.website
         })
-        this.tweets = user['user'].tweets;
+        this.tweets = user['user'].tweets.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } );
         this.numberOfTweets = user['user'].tweets.length;
         this.numberOfFollowers = user['numFollowers'];
         this.numberOfFollowing = user['numFollowing'];

@@ -78,7 +78,7 @@ router.route('/tweet')
                 success: true,
                 bio: user.profile.bio,
                 location: user.profile.location,
-                tweets: user.tweets.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } )
+                tweets: user.tweets
             })
         })
     })
