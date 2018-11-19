@@ -394,7 +394,7 @@ var UserService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".card-body {\r\n    width: 335px;\r\n}\r\n\r\n.card {\r\n    width: 335px;\r\n}\r\n\r\nimg {\r\n    border-radius: 50%;\r\n    width: 40px;\r\n}\r\n\r\ntextarea {\r\n    width: 300px;\r\n    height: 100px;\r\n}\r\n\r\ntextarea {\r\n    border-radius: 30px;\r\n}\r\n\r\n.readyToTweet{\r\n    background-color: #E8F5FD;\r\n}\r\n\r\n@media (min-width: 768px) {\r\n    .card-body {\r\n        width: 510px;\r\n    }\r\n    \r\n    .card {\r\n        width: 510px;\r\n    }\r\n    textarea {\r\n        width: 450px;\r\n        }\r\n    .btn-primary{\r\n        float: left;\r\n    }\r\n}\r\n\r\n@media screen and (min-width: 0px) and  (max-width: 767px) {\r\n    .card {\r\n        margin-left: 7px;\r\n    }\r\n}\r\n\r\n\r\n\r\n"
+module.exports = ".card-body {\r\n    width: 335px;\r\n}\r\n\r\n.card {\r\n    width: 335px;\r\n}\r\n\r\nimg {\r\n    border-radius: 50%;\r\n    width: 40px;\r\n}\r\n\r\ntextarea {\r\n    width: 300px;\r\n    height: 100px;\r\n}\r\n\r\ntextarea {\r\n    border-radius: 30px;\r\n}\r\n\r\n.readyToTweet{\r\n    background-color: #E8F5FD;\r\n}\r\n\r\n@media (min-width: 768px) {\r\n    .card-body {\r\n        width: 510px;\r\n    }\r\n    \r\n    .card {\r\n        width: 510px;\r\n    }\r\n    textarea {\r\n        width: 450px;\r\n        }\r\n    .btn-primary{\r\n        float: left;\r\n    }\r\n}\r\n\r\n@media screen and (min-width: 0px) and  (max-width: 767px) {\r\n    .card {\r\n        margin-left: 9px;\r\n    }\r\n}\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
