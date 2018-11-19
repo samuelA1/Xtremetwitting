@@ -50,3 +50,9 @@ img {
         float: left;
     }
 }
+
+@media screen and (min-width: 0px) and  (max-width: 767px) {
+    .card-you {
+        width: 340px;
+    }
+}
