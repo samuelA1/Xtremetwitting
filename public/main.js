@@ -1633,7 +1633,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".card-image-top {\r\n    background-color: #e9ecef;\r\n}\r\n\r\n.img-profile {\r\n    width: 200px;\r\n}\r\n\r\nimg {\r\n    border-radius: 50%;\r\n}\r\n\r\n.card-body-body {\r\n    width: 410px;\r\n}\r\n\r\n.card-you {\r\n    width: 410px;\r\n}\r\n\r\n.img-tweet {\r\n    width: 40px;\r\n}\r\n\r\n.tabChange > h4 {\r\n    color:  #1DA1F2;\r\n    border-bottom: 3px solid #1DA1F2;\r\n}\r\n\r\n.unChange {\r\n    color: black;\r\n}\r\n\r\n.btn-primary, .btn-outline-primary, .btn-outline-secondary {\r\n    border-radius: 100px;\r\n}\r\n\r\n.clearfix { \r\n    display: block; \r\n    height: 0; \r\n    clear: both;\r\n }\r\n\r\n@media screen and (min-width: 0px) and  (max-width: 767px) {\r\n    .button-change {\r\n        display: block;\r\n    }\r\n}"
+module.exports = ".card-image-top {\r\n    background-color: #e9ecef;\r\n}\r\n\r\n.img-profile {\r\n    width: 200px;\r\n}\r\n\r\nimg {\r\n    border-radius: 50%;\r\n}\r\n\r\n.card-body-body {\r\n    width: 410px;\r\n}\r\n\r\n.card-you {\r\n    width: 410px;\r\n}\r\n\r\n.img-tweet {\r\n    width: 40px;\r\n}\r\n\r\n.tabChange > h4 {\r\n    color:  #1DA1F2;\r\n    border-bottom: 3px solid #1DA1F2;\r\n}\r\n\r\n.unChange {\r\n    color: black;\r\n}\r\n\r\n.btn-primary, .btn-outline-primary, .btn-outline-secondary {\r\n    border-radius: 100px;\r\n}\r\n\r\n.clearfix { \r\n    display: block; \r\n    height: 0; \r\n    clear: both;\r\n }\r\n\r\n@media screen and (min-width: 0px) and  (max-width: 767px) {\r\n    .button-change {\r\n        display: none;\r\n    }\r\n}"
 
 /***/ }),
 
