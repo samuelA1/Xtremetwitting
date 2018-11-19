@@ -43,6 +43,10 @@ img {
 
  @media screen and (min-width: 0px) and  (max-width: 767px) {
     .button-change {
-        display: none;
+        width: 40px;
+    }
+
+    .list-inline {
+        float: left;
     }
 }
