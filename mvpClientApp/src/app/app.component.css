@@ -27,3 +27,9 @@ img:hover {
     max-width: 400px;
     margin: 5px;
 }
+
+@media screen and (min-width: 0px) and  (max-width: 767px) {
+    .img-profile {
+        float: right;
+    }
+}

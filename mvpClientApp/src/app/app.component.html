@@ -14,7 +14,7 @@
             </div>
             <div class="list-inline">
                 <img src="{{authService.user?.user.picture}}" alt="{{authService.user?.user.username}}"
-                      class="mr-3" id="dropdownBasic1" [ngbTooltip]="tipContent" placement="bottom" triggers="click" [autoClose]="true">
+                      class="mr-3 img-profile" id="dropdownBasic1" [ngbTooltip]="tipContent" placement="bottom" triggers="click" [autoClose]="true">
               <button *ngIf="authService.user?.user.username" class="btn btn-primary btn-tweet" (click)="openModal(template)"><strong>Tweet</strong></button>
             </div>
           </div>

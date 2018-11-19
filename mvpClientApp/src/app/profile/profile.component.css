@@ -40,3 +40,9 @@ img {
     height: 0; 
     clear: both;
  }
+
+ @media screen and (min-width: 0px) and  (max-width: 767px) {
+    .button-change {
+        display: block;
+    }
+}
