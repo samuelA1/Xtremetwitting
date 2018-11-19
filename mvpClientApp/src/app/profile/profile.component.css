@@ -50,7 +50,11 @@ img {
         float: left;
     }
 
+    .card-body-body {
+        width: 340px;
+    }
+    
     .card-you {
-        width: 359px;
+        width: 340px;
     }
 }
