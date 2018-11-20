@@ -42,9 +42,9 @@ tweets: any[];
       if (this.tweetValidation()) {
         var tweet = await this.userService.postTweet(this.tweet);
         this.tweets.unshift({dateTweeted: Date.now(),
-        tweet: this.tweet['tweet'], owner: {firstName: this.authService.user.user.firstName,
+        tweet: this.tweet['tweet'], _id: tweet['tweetId'], owner: {firstName: this.authService.user.user.firstName,
         lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
-        picture: this.authService.user.user.picture, _id: tweet['tweetId'] 
+        picture: this.authService.user.user.picture 
       }});
         if (tweet['success']) {
           this.f.reset();
