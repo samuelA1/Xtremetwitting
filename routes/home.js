@@ -52,7 +52,8 @@ router.route('/tweet')
             },
             function(user) {
                 var tweet = new Tweet();
-                var tweetId;
+                tweetId;
+
                 if (req.body.tweet) tweet.tweet = req.body.tweet;
                 tweet.owner = user._id;
                 user.tweets.push(tweet._id);
