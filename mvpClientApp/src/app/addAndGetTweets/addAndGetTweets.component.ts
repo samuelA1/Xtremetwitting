@@ -40,12 +40,12 @@ tweets: any[];
   async postTweet() {
     try {
       if (this.tweetValidation()) {
+        var tweet = await this.userService.postTweet(this.tweet);
         this.tweets.unshift({dateTweeted: Date.now(),
         tweet: this.tweet['tweet'], owner: {firstName: this.authService.user.user.firstName,
         lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
-        picture: this.authService.user.user.picture
+        picture: this.authService.user.user.picture, _id: tweet['tweetId'] 
       }});
-        const tweet = await this.userService.postTweet(this.tweet);
         if (tweet['success']) {
           this.f.reset();
           this.alertify.success('Tweet created');

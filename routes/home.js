@@ -51,7 +51,7 @@ router.route('/tweet')
                 })
             },
             function(user) {
-                let tweet = new Tweet();
+                var tweet = new Tweet();
                 if (req.body.tweet) tweet.tweet = req.body.tweet;
                 tweet.owner = user._id;
                 user.tweets.push(tweet._id);
@@ -60,6 +60,7 @@ router.route('/tweet')
                 tweet.save();
                 res.json({
                     success: true,
+                    tweetId: tweet._id
                 })
     
             }

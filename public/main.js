@@ -519,14 +519,14 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 4, , 5]);
                         if (!this.tweetValidation()) return [3 /*break*/, 2];
-                        this.tweets.unshift({ dateTweeted: Date.now(),
-                            tweet: this.tweet['tweet'], owner: { firstName: this.authService.user.user.firstName,
-                                lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
-                                picture: this.authService.user.user.picture
-                            } });
                         return [4 /*yield*/, this.userService.postTweet(this.tweet)];
                     case 1:
                         tweet = _a.sent();
+                        this.tweets.unshift({ dateTweeted: Date.now(),
+                            tweet: this.tweet['tweet'], owner: { firstName: this.authService.user.user.firstName,
+                                lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
+                                picture: this.authService.user.user.picture, _id: tweet['tweetId']
+                            } });
                         if (tweet['success']) {
                             this.f.reset();
                             this.alertify.success('Tweet created');
