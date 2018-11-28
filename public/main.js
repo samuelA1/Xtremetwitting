@@ -675,6 +675,7 @@ var routes = [
         canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_1__["AuthGuard"]],
         children: [
             { path: 'profile/:id', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_0__["ProfileComponent"] },
+            { path: 'profile/teamtwitter', component: _app_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] }
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }
