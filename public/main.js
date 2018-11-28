@@ -2344,7 +2344,9 @@ var SuggestionsComponent = /** @class */ (function () {
     SuggestionsComponent.prototype.route = function (id, name) {
         this.userService.userId = id;
         localStorage.setItem('userId', id);
-        this.router.navigate(['/profile', 'name']);
+        this.router.navigate(['/profile', "" + name]).then(() => {
+            window.location.reload();
+        })
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"])('toRemove'),
