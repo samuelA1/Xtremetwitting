@@ -2,13 +2,13 @@
   <h4 class="text-center mt-3">Who to follow?</h4>
     <div class="card-body list-inline" *ngFor="let user of suggestions">
         <div class="float-left">
-            <a routerLink="/profile/{{user?._id}}" routerLinkActive="router-link-active" (click)="route()">
+            <a  routerLinkActive="router-link-active" (click)="route(user?._id, user?.username)">
               <img class="list-inline-item" src="{{user?.picture}}" alt="{{user?.username}}"
             class="mr-3">
             </a>
         </div>
        <div class="float-left">
-          <a routerLink="/profile/{{user?._id}}" routerLinkActive="router-link-active" (click)="route()">
+          <a  routerLinkActive="router-link-active" (click)="route(user?._id, user?.username)">
             <h6 class="card-title list-inline-item">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}
             <strong>@{{user?.username}}</strong></h6>
           </a>

@@ -35,6 +35,11 @@ location: any;
     this.numberOfFollowing = follow['following'].length;
   }
 
+  profile(id) {
+    this.userService.userId = id;
+    localStorage.setItem('userId', id);
+  }
+
   reduceSomething(model: number) {
     if(model == -1) {
       this.numberOfTweets -=1

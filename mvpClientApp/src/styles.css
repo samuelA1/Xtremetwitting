@@ -28,8 +28,13 @@ height: 50px;
 
 a {
     color: black;
+    cursor: pointer;
 }
 
+body {
+    max-width: 1400px;
+    width: 100%;
+}
 @media screen and (min-width: 0px) and  (max-width: 767px) {
     .card {
         border: none;

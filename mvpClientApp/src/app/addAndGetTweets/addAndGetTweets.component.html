@@ -18,11 +18,11 @@
 
 <div class="card" *ngFor="let tweet of tweets">
     <div class="card-body list-inline">
-        <a routerLink="/profile/{{tweet.owner?._id}}" routerLinkActive="router-link-active" >
+        <a routerLink="/profile/{{tweet.owner?.username}}" routerLinkActive="router-link-active" (click)="profile(tweet.owner?._id)">
           <img class="list-inline-item" src="{{tweet.owner?.picture}}" alt="{{tweet.owner?.username}}"
           class="mr-3">
         </a>
-        <a routerLink="/profile/{{tweet.owner?._id}}" routerLinkActive="router-link-active" >
+        <a routerLink="/profile/{{tweet.owner?.username}}" routerLinkActive="router-link-active" (click)="profile(tweet.owner?._id)">
           <h6 class="card-title list-inline-item">{{tweet.owner?.firstName | titlecase}} {{tweet.owner?.lastName | titlecase}}
               <strong>@{{tweet.owner?.username}}</strong></h6>
         </a>

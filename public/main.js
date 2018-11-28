@@ -405,7 +405,7 @@ module.exports = ".card-body {\r\n    width: 335px;\r\n}\r\n\r\n.card {\r\n    w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"card readyToTweet\">\n  <div class=\"card-body\">\n    <form #f=\"ngForm\" (ngSubmit)=\"postTweet()\" class=\"text-center\">\n      <div class=\"form-group \">\n          <label for=\"tweet\">What's on your mind?<textarea name=\"tweet\" class=\"form-control\" id=\"tweet\" \n            rows=\"1\" [(ngModel)]=\"tweet.tweet\" (keyup)=\"keepTweet()\">\n          </textarea>\n          </label>\n      </div>\n      <button [disabled]=\"!f.dirty\" type=\"submit\" class=\"btn btn-primary text-center\">Tweet</button>\n  </form> \n  </div>\n</div>\n            \n         \n\n\n<div class=\"card\" *ngFor=\"let tweet of tweets\">\n    <div class=\"card-body list-inline\">\n        <a routerLink=\"/profile/{{tweet.owner?._id}}\" routerLinkActive=\"router-link-active\" >\n          <img class=\"list-inline-item\" src=\"{{tweet.owner?.picture}}\" alt=\"{{tweet.owner?.username}}\"\n          class=\"mr-3\">\n        </a>\n        <a routerLink=\"/profile/{{tweet.owner?._id}}\" routerLinkActive=\"router-link-active\" >\n          <h6 class=\"card-title list-inline-item\">{{tweet.owner?.firstName | titlecase}} {{tweet.owner?.lastName | titlecase}}\n              <strong>@{{tweet.owner?.username}}</strong></h6>\n        </a>\n        <p class=\"card-text mt-3\">{{tweet.tweet}}</p>\n      <small class=\"text-muted \">{{tweet.dateTweeted | timeAgo}}</small>\n      <button *ngIf=\"tweet.owner?.username == authService.user.user.username\"\n       class=\"btn btn-danger btn-sm  float-right\" type=\"button\" (click)=\"deleteTweet(tweet._id)\">Delete</button>\n    </div>\n  </div>\n\n"
+module.exports = "\n<div class=\"card readyToTweet\">\n  <div class=\"card-body\">\n    <form #f=\"ngForm\" (ngSubmit)=\"postTweet()\" class=\"text-center\">\n      <div class=\"form-group \">\n          <label for=\"tweet\">What's on your mind?<textarea name=\"tweet\" class=\"form-control\" id=\"tweet\" \n            rows=\"1\" [(ngModel)]=\"tweet.tweet\" (keyup)=\"keepTweet()\">\n          </textarea>\n          </label>\n      </div>\n      <button [disabled]=\"!f.dirty\" type=\"submit\" class=\"btn btn-primary text-center\">Tweet</button>\n  </form> \n  </div>\n</div>\n            \n         \n\n\n<div class=\"card\" *ngFor=\"let tweet of tweets\">\n    <div class=\"card-body list-inline\">\n        <a routerLink=\"/profile/{{tweet.owner?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(tweet.owner?._id)\">\n          <img class=\"list-inline-item\" src=\"{{tweet.owner?.picture}}\" alt=\"{{tweet.owner?.username}}\"\n          class=\"mr-3\">\n        </a>\n        <a routerLink=\"/profile/{{tweet.owner?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(tweet.owner?._id)\">\n          <h6 class=\"card-title list-inline-item\">{{tweet.owner?.firstName | titlecase}} {{tweet.owner?.lastName | titlecase}}\n              <strong>@{{tweet.owner?.username}}</strong></h6>\n        </a>\n        <p class=\"card-text mt-3\">{{tweet.tweet}}</p>\n      <small class=\"text-muted \">{{tweet.dateTweeted | timeAgo}}</small>\n      <button *ngIf=\"tweet.owner?.username == authService.user.user.username\"\n       class=\"btn btn-danger btn-sm  float-right\" type=\"button\" (click)=\"deleteTweet(tweet._id)\">Delete</button>\n    </div>\n  </div>\n\n"
 
 /***/ }),
 
@@ -419,11 +419,12 @@ module.exports = "\n<div class=\"card readyToTweet\">\n  <div class=\"card-body\
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddAndGetTweetsComponent", function() { return AddAndGetTweetsComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_tweet_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_services/tweet.service */ "./src/app/_services/tweet.service.ts");
-/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../_services/auth.service */ "./src/app/_services/auth.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../_services/user.service */ "./src/app/_services/user.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_tweet_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_services/tweet.service */ "./src/app/_services/tweet.service.ts");
+/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_services/auth.service */ "./src/app/_services/auth.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -473,12 +474,14 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var AddAndGetTweetsComponent = /** @class */ (function () {
-    function AddAndGetTweetsComponent(userService, alertify, authService) {
-        this.userService = userService;
+    function AddAndGetTweetsComponent(tweetService, alertify, authService, userService) {
+        this.tweetService = tweetService;
         this.alertify = alertify;
         this.authService = authService;
-        this.reduce = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.userService = userService;
+        this.reduce = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.tweet = {};
     }
     AddAndGetTweetsComponent.prototype.getTweets = function () {
@@ -488,10 +491,10 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.userService.getTweets()];
+                        return [4 /*yield*/, this.tweetService.getTweets()];
                     case 1:
                         tweets = _a.sent();
-                        return [4 /*yield*/, this.userService.getUserRecentTweets()];
+                        return [4 /*yield*/, this.tweetService.getUserRecentTweets()];
                     case 2:
                         recentTweets = _a.sent();
                         if (tweets['success']) {
@@ -519,7 +522,7 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 4, , 5]);
                         if (!this.tweetValidation()) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.userService.postTweet(this.tweet)];
+                        return [4 /*yield*/, this.tweetService.postTweet(this.tweet)];
                     case 1:
                         tweet = _a.sent();
                         this.tweets.unshift({ dateTweeted: Date.now(),
@@ -555,7 +558,7 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 this.alertify.confirm('Are you sure you want to delete this tweet?', function () {
-                    _this.userService.deleteTweet(id);
+                    _this.tweetService.deleteTweet(id);
                     _this.tweets.splice(_this.tweets.findIndex(function (t) { return t._id === id; }), 1);
                     _this.alertify.success('Tweet deleted');
                     _this.reduce.emit(-1);
@@ -571,6 +574,10 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
         else {
             this.alertify.error('Please enter a tweet');
         }
+    };
+    AddAndGetTweetsComponent.prototype.profile = function (id) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
     };
     AddAndGetTweetsComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -590,7 +597,7 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
     };
     AddAndGetTweetsComponent.prototype.addRecentTweet = function () {
         var _this = this;
-        this.userService.recentTweet.subscribe(function (tweetObj) { return _this.tweets.unshift(tweetObj); });
+        this.tweetService.recentTweet.subscribe(function (tweetObj) { return _this.tweets.unshift(tweetObj); });
     };
     AddAndGetTweetsComponent.prototype.keepTweet = function () {
         if (this.tweet.tweet) {
@@ -604,22 +611,23 @@ var AddAndGetTweetsComponent = /** @class */ (function () {
         }
     };
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('f'),
-        __metadata("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        __metadata("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgForm"])
     ], AddAndGetTweetsComponent.prototype, "f", void 0);
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
         __metadata("design:type", Object)
     ], AddAndGetTweetsComponent.prototype, "reduce", void 0);
     AddAndGetTweetsComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-addAndGetTweets',
             template: __webpack_require__(/*! ./addAndGetTweets.component.html */ "./src/app/addAndGetTweets/addAndGetTweets.component.html"),
             styles: [__webpack_require__(/*! ./addAndGetTweets.component.css */ "./src/app/addAndGetTweets/addAndGetTweets.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_tweet_service__WEBPACK_IMPORTED_MODULE_1__["TweetService"],
-            _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+        __metadata("design:paramtypes", [_services_tweet_service__WEBPACK_IMPORTED_MODULE_2__["TweetService"],
+            _services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _services_user_service__WEBPACK_IMPORTED_MODULE_0__["UserService"]])
     ], AddAndGetTweetsComponent);
     return AddAndGetTweetsComponent;
 }());
@@ -1004,7 +1012,7 @@ module.exports = ".btn-outline-primary {\r\n    border-radius: 100px;\r\n}\r\n\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"followers.length === 0\">\n  <h1>Not being followered by anyone yet</h1>\n</div>\n<div *ngFor=\"let follower of followers\" class=\"card mb-3 mr-3\" style=\"width: 18rem; display: inline-block;\" \n      >\n    <div *ngIf=\"followers.length == 1 && follower._id == authService.user?.user._id\">\n        <h1>You're the user following him</h1>\n    </div>\n    <div *ngIf=\"follower._id != authService.user?.user._id\">\n      <a routerLink=\"/profile/{{follower?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n        <img class=\"card-img-top\" src=\"{{follower?.picture}}\" alt=\"follower?.username\" style=\"height: 100px;\">\n      </a>\n      <div class=\"card-body\">\n          <button *ngIf=\"follower?.both\" type=\"button\" class=\"btn btn-primary float-right mr-5\" (click)=\"unfollow(follower?._id)\">unfollow</button>\n          <button *ngIf=\"!follower?.both && authService.user?.user._id == userId\" type=\"button\" class=\"btn btn-outline-primary float-right mr-5\"\n          (click)=\"follow(follower?._id)\">follow</button>\n          <a routerLink=\"/profile/{{follower?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n            <strong>{{follower?.firstName | titlecase}} {{follower?.lastName | titlecase}}</strong>\n          </a>\n          <br>\n          <small class=\"text-muted text-center\">@{{follower?.username}}</small>\n        <div class=\"list-inline text-center\">\n          <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n          <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n          <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n        </div>\n        <div class=\"list-inline text-center\">\n            <h4 class=\"list-inline-item mr-5\">{{follower?.tweets?.length}}</h4>\n            <h4 class=\"list-inline-item mr-5\">{{follower?.following?.length}}</h4>\n            <h4 class=\"list-inline-item mr-5\">{{follower?.followers?.length}}</h4>\n        </div>\n        <small class=\"text-center text-muted\">Follows you</small>\n      </div>\n    </div>\n</div>"
+module.exports = "<div *ngIf=\"followers.length === 0\">\n  <h1>Not being followered by anyone yet</h1>\n</div>\n<div *ngFor=\"let follower of followers\" class=\"card mb-3 mr-3\" style=\"width: 18rem; display: inline-block;\" \n      >\n    <div *ngIf=\"followers.length == 1 && follower._id == authService.user?.user._id\">\n        <h1>You're the user following him</h1>\n    </div>\n    <div *ngIf=\"follower._id != authService.user?.user._id\">\n      <a routerLink=\"/profile/{{follower?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(follower?._id)\">\n        <img class=\"card-img-top\" src=\"{{follower?.picture}}\" alt=\"follower?.username\" style=\"height: 100px;\">\n      </a>\n      <div class=\"card-body\">\n          <button *ngIf=\"follower?.both\" type=\"button\" class=\"btn btn-primary float-right\" (click)=\"unfollow(follower?._id)\">unfollow</button>\n          <button *ngIf=\"!follower?.both && authService.user?.user._id == userId\" type=\"button\" class=\"btn btn-outline-primary float-right\"\n          (click)=\"follow(follower?._id)\">follow</button>\n          <a routerLink=\"/profile/{{follower?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(follower?._id)\">\n            <strong>{{follower?.firstName | titlecase}} {{follower?.lastName | titlecase}}</strong>\n          </a>\n          <br>\n          <small class=\"text-muted text-center\">@{{follower?.username}}</small>\n        <div class=\"list-inline text-center\">\n          <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n          <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n          <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n        </div>\n        <div class=\"list-inline text-center\">\n            <h4 class=\"list-inline-item mr-5\">{{follower?.tweets?.length}}</h4>\n            <h4 class=\"list-inline-item mr-5\">{{follower?.following?.length}}</h4>\n            <h4 class=\"list-inline-item mr-5\">{{follower?.followers?.length}}</h4>\n        </div>\n        <small class=\"text-center text-muted\">Follows you</small>\n      </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1137,7 +1145,12 @@ var FollowersComponent = /** @class */ (function () {
             });
         });
     };
-    FollowersComponent.prototype.route = function () {
+    // route() {
+    //   window.location.reload();
+    // }
+    FollowersComponent.prototype.profile = function (id) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
         window.location.reload();
     };
     __decorate([
@@ -1183,7 +1196,7 @@ module.exports = ".btn-outline-primary {\r\n    border-radius: 100px;\r\n}\r\n\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"followings.length == 0 \">\n  <h1>Not following anyone yet</h1>\n</div>\n\n<div *ngFor=\"let following of followings\" class=\"card mb-3 mr-3\" style=\"width: 18rem; display: inline-block;\" >\n    <div *ngIf=\"followings?.length == 1 && following._id == authService.user?.user._id\">\n        <h1>You're the user he's following</h1>\n    </div>\n   <div *ngIf=\"following._id != authService.user?.user._id\">\n    <a routerLink=\"/profile/{{following?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n      <img class=\"card-img-top\" src=\"{{following?.picture}}\" alt=\"following?.username\" style=\"height: 100px;\">\n    </a>\n    <div class=\"card-body\">\n        <button *ngIf=\"authService.user?.user._id == userId\" type=\"button\" class=\"btn btn-primary float-right mr-5\"\n         (click)=\"unfollow(following?._id)\">unfollow</button>\n        <a routerLink=\"/profile/{{following?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n          <strong>{{following?.firstName | titlecase}} {{following?.lastName | titlecase}}</strong>\n        </a>\n        <br>\n        <small class=\"text-muted text-center\">@{{following?.username}}</small>\n      <div class=\"list-inline text-center\">\n        <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n        <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n        <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n      </div>\n      <div class=\"list-inline text-center\">\n        <h4 class=\"list-inline-item mr-5\">{{following?.tweets?.length}}</h4>\n        <h4 class=\"list-inline-item mr-5\">{{following?.following?.length}}</h4>\n        <h4 class=\"list-inline-item mr-5\">{{following?.followers?.length}}</h4>\n      </div>\n      <small class=\"text-center text-muted\">Following</small>\n    </div>\n   </div>\n</div>"
+module.exports = "<div *ngIf=\"followings.length == 0 \">\n  <h1>Not following anyone yet</h1>\n</div>\n\n<div *ngFor=\"let following of followings\" class=\"card mb-3 mr-3\" style=\"width: 18rem; display: inline-block;\" >\n    <div *ngIf=\"followings?.length == 1 && following._id == authService.user?.user._id\">\n        <h1>You're the user he's following</h1>\n    </div>\n   <div *ngIf=\"following._id != authService.user?.user._id\">\n    <a routerLink=\"/profile/{{following?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(following?._id)\">\n      <img class=\"card-img-top\" src=\"{{following?.picture}}\" alt=\"following?.username\" style=\"height: 100px;\">\n    </a>\n    <div class=\"card-body\">\n        <button *ngIf=\"authService.user?.user._id == userId\" type=\"button\" class=\"btn btn-primary float-right\"\n         (click)=\"unfollow(following?._id)\">unfollow</button>\n        <a routerLink=\"/profile/{{following?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(following?._id)\">\n          <strong>{{following?.firstName | titlecase}} {{following?.lastName | titlecase}}</strong>\n        </a>\n        <br>\n        <small class=\"text-muted text-center\">@{{following?.username}}</small>\n      <div class=\"list-inline text-center\">\n        <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n        <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n        <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n      </div>\n      <div class=\"list-inline text-center\">\n        <h4 class=\"list-inline-item mr-5\">{{following?.tweets?.length}}</h4>\n        <h4 class=\"list-inline-item mr-5\">{{following?.following?.length}}</h4>\n        <h4 class=\"list-inline-item mr-5\">{{following?.followers?.length}}</h4>\n      </div>\n      <small class=\"text-center text-muted\">Following</small>\n    </div>\n   </div>\n</div>"
 
 /***/ }),
 
@@ -1297,7 +1310,9 @@ var FollowingComponent = /** @class */ (function () {
             });
         });
     };
-    FollowingComponent.prototype.route = function () {
+    FollowingComponent.prototype.profile = function (id) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
         window.location.reload();
     };
     __decorate([
@@ -1343,7 +1358,7 @@ module.exports = "\r\nimg {\r\n    border-radius: 50%;\r\n    width: 80px;\r\n}\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div role=\"main\">\n\n  <section *ngIf=\"!token\" class=\" text-center\">\n    <div class=\"container\">\n      <h1 class=\"jumbotron-heading\">Join and follow Celebrities and Entrepreneurs</h1>\n      <p class=\"lead text-muted\">It's free and will always be, signup now and enjoy a new social experience</p>\n      <p>\n        <a [routerLink]=\"['/login']\" routerLinkActive=\"router-link-active\"  class=\"btn btn-primary my-2 mr-2\">\n          Login</a>\n        <a [routerLink]=\"['/register']\" routerLinkActive=\"router-link-active\"  class=\"btn btn-secondary my-2\">\n          Register</a>\n      </p>\n    </div>\n  </section>\n\n  <div *ngIf=\"token\">\n    <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-lg-3\">\n              <div class=\"card\">\n                  <div class=\"card-body\">\n                    <div class=\"text-center\">\n                        <a routerLink=\"/profile/{{authService.user?.user._id}}\" routerLinkActive=\"router-link-active\" >\n                          <img src=\"{{authService.user?.user.picture}}\" alt=\"{{authService.user?.user.username}}\">\n                        </a>\n                      <br>\n                      <a routerLink=\"/profile/{{authService.user?.user._id}}\" routerLinkActive=\"router-link-active\" >\n                        <strong>{{authService.user?.user.firstName | titlecase}} {{authService.user?.user.lastName | titlecase}}</strong>\n                      </a>\n                      \n                      <br>\n                      <small class=\"text-muted text-center\">@{{authService.user?.user.username}}</small>\n                    </div>\n                    <div class=\"list-inline text-center\">\n                      <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n                      <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n                      <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n                    </div>\n                    <div class=\"list-inline text-center\">\n                      <a [routerLink]=\"['/profile', authService.user?.user._id, {change: 1}]\" routerLinkActive=\"router-link-active\"  >\n                        <h4 style=\"color:#1DA1F2\" class=\"list-inline-item mr-5\">{{numberOfTweets}}</h4>\n                      </a>\n                      <a [routerLink]=\"['/profile', authService.user?.user._id, {change: 2}]\" routerLinkActive=\"router-link-active\"  >\n                        <h4 style=\"color:#1DA1F2\" class=\"list-inline-item mr-5\">{{numberOfFollowing}}</h4>\n                      </a>\n                      <a [routerLink]=\"['/profile', authService.user?.user._id, {change: 3}]\" routerLinkActive=\"router-link-active\"  >\n                        <h4 style=\"color:#1DA1F2\" class=\"list-inline-item mr-5\">{{numberOfFollowers}}</h4>\n                      </a>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"card mt-5\" style=\"width: 16rem;background-color: #E8F5FD\">\n                    <div class=\"card-body\">\n                        <p *ngIf=\"bio\" class=\"text-muted\">{{bio | titlecase}}</p>\n                        <p *ngIf=\"location\" class=\"text-muted\"><i class=\"fas fa-map-marker-alt mr-3\">\n                          {{location | titlecase}}</i></p>\n                        <p class=\"text-muted\"><i class=\"far fa-calendar-alt mr-3\">\n                            Joined {{authService.user?.user.dateCreated | date : 'longDate'}}</i></p>\n                    </div>\n                  </div>\n          </div>\n            <div class=\"col-lg-6\">\n              <app-addAndGetTweets (reduce)=reduceSomething($event)></app-addAndGetTweets>\n            </div>\n            <div class=\"col-lg-3\">\n              <app-suggestions (reduce)=reduceSomething($event)></app-suggestions>\n            </div>\n        </div>\n    </div>\n  </div>\n\n\n\n</div>\n"
+module.exports = "\n\n<div role=\"main\">\n\n  <section *ngIf=\"!token\" class=\" text-center\">\n    <div class=\"container\">\n      <h1 class=\"jumbotron-heading\">Join and follow Celebrities and Entrepreneurs</h1>\n      <p class=\"lead text-muted\">It's free and will always be, signup now and enjoy a new social experience</p>\n      <p>\n        <a [routerLink]=\"['/login']\" routerLinkActive=\"router-link-active\"  class=\"btn btn-primary my-2 mr-2\">\n          Login</a>\n        <a [routerLink]=\"['/register']\" routerLinkActive=\"router-link-active\"  class=\"btn btn-secondary my-2\">\n          Register</a>\n      </p>\n    </div>\n  </section>\n\n  <div *ngIf=\"token\">\n    <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-lg-3\">\n              <div class=\"card\">\n                  <div class=\"card-body\">\n                    <div class=\"text-center\">\n                        <a routerLink=\"/profile/{{authService.user?.user.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(authService.user?.user._id)\">\n                          <img src=\"{{authService.user?.user.picture}}\" alt=\"{{authService.user?.user.username}}\">\n                        </a>\n                      <br>\n                      <a routerLink=\"/profile/{{authService.user?.user.username}}\" routerLinkActive=\"router-link-active\" (click)=\"profile(authService.user?.user._id)\">\n                        <strong>{{authService.user?.user.firstName | titlecase}} {{authService.user?.user.lastName | titlecase}}</strong>\n                      </a>\n                      \n                      <br>\n                      <small class=\"text-muted text-center\">@{{authService.user?.user.username}}</small>\n                    </div>\n                    <div class=\"list-inline text-center\">\n                      <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n                      <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n                      <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n                    </div>\n                    <div class=\"list-inline text-center\">\n                      <a [routerLink]=\"['/profile', authService.user?.user.username, {change: 1}]\" routerLinkActive=\"router-link-active\" (click)=\"profile(authService.user?.user._id)\" >\n                        <h4 style=\"color:#1DA1F2\" class=\"list-inline-item mr-5\">{{numberOfTweets}}</h4>\n                      </a>\n                      <a [routerLink]=\"['/profile', authService.user?.user.username, {change: 2}]\" routerLinkActive=\"router-link-active\" (click)=\"profile(authService.user?.user._id)\" >\n                        <h4 style=\"color:#1DA1F2\" class=\"list-inline-item mr-5\">{{numberOfFollowing}}</h4>\n                      </a>\n                      <a [routerLink]=\"['/profile', authService.user?.user.username, {change: 3}]\" routerLinkActive=\"router-link-active\" (click)=\"profile(authService.user?.user._id)\" >\n                        <h4 style=\"color:#1DA1F2\" class=\"list-inline-item mr-5\">{{numberOfFollowers}}</h4>\n                      </a>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"card mt-5\" style=\"width: 16rem;background-color: #E8F5FD\">\n                    <div class=\"card-body\">\n                        <p *ngIf=\"bio\" class=\"text-muted\">{{bio | titlecase}}</p>\n                        <p *ngIf=\"location\" class=\"text-muted\"><i class=\"fas fa-map-marker-alt mr-3\">\n                          {{location | titlecase}}</i></p>\n                        <p class=\"text-muted\"><i class=\"far fa-calendar-alt mr-3\">\n                            Joined {{authService.user?.user.dateCreated | date : 'longDate'}}</i></p>\n                    </div>\n                  </div>\n          </div>\n            <div class=\"col-lg-6\">\n              <app-addAndGetTweets (reduce)=reduceSomething($event)></app-addAndGetTweets>\n            </div>\n            <div class=\"col-lg-3\">\n              <app-suggestions (reduce)=reduceSomething($event)></app-suggestions>\n            </div>\n        </div>\n    </div>\n  </div>\n\n\n\n</div>\n"
 
 /***/ }),
 
@@ -1438,6 +1453,10 @@ var HomeComponent = /** @class */ (function () {
                 }
             });
         });
+    };
+    HomeComponent.prototype.profile = function (id) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
     };
     HomeComponent.prototype.reduceSomething = function (model) {
         if (model == -1) {
@@ -1644,7 +1663,7 @@ module.exports = ".card-image-top {\r\n    background-color: #e9ecef;\r\n}\r\n\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"background-color: #E8F5FD\">\n    <div class=\"card\">\n        <div class=\"card-image-top text-center\">\n            <img src=\"{{user?.picture}}\" alt=\"{{user?.username}}\" class=\"img-profile\">\n            <br>\n            <strong class=\"display-4\">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</strong>\n            <br>\n            <h5 class=\"text-muted text-center\">@{{user?.username}}</h5>\n        </div>\n        <div class=\"card-header\">\n            <div class=\"list-inline text-center\">\n                <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n                <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n                <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n            </div>\n            <div class=\"float-right clearfix mr-5 button-change\">\n              <button *ngIf=\"toFollow\" type=\"button\" class=\"btn btn-outline-primary  \" (click)=\"follow(user?._id)\">Follow</button>\n              <button *ngIf=\"user?._id == authService.user?.user._id\" type=\"button\" class=\"btn btn-outline-secondary\" \n              (click)=\"openModal(template)\">Edit profile</button>\n              <button *ngIf=\"!toFollow && user?._id != authService.user?.user._id \" type=\"button\" class=\"btn btn-primary  \"\n                (click)=\"unfollow(user?._id)\" (mouseover)=\"statusChange='unfollow'\" \n                (mouseleave)=\"statusChange='following'\">{{statusChange | titlecase}}</button>\n            </div>\n            <div class=\"list-inline text-center\">\n              <a class=\"btn\" (click)=\"change(1)\" [ngClass]=\"tabChange == 1 ? 'tabChange' : 'unChange'\"  >\n                <h4  class=\"list-inline-item mr-3\">{{numberOfTweets}}</h4>\n              </a>\n              <a class=\"btn\" (click)=\"change(2)\" [ngClass]=\"tabChange == 2 ? 'tabChange' : 'unChange'\">\n                <h4  class=\"list-inline-item ml-2\">\n                  {{numberOfFollowing}}</h4>\n              </a>\n              <a  class=\"btn\" (click)=\"change(3)\" [ngClass]=\"tabChange == 3 ? 'tabChange' : 'unChange'\">\n                <h4  class=\"list-inline-item ml-5\">\n                  {{numberOfFollowers}}</h4>\n              </a>\n            </div>\n        </div>\n    </div>\n    <br>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-md-4\">\n            <p class=\"text-muted\">{{user?.profile?.bio | titlecase}}</p>\n            <p *ngIf=\"user.profile?.location\" class=\"text-muted\"><i class=\"fas fa-map-marker-alt mr-2\">\n              {{user?.profile?.location | titlecase}}</i></p>\n            <p class=\"text-muted\"><i class=\"far fa-calendar-alt\">\n                Joined {{user?.dateCreated | date : 'longDate'}}</i></p>\n        </div>\n        <div class=\"col-md\">\n          <div *ngIf=\"tweets?.length == 0 && tabChange ==1 \">\n            <h1>No tweets yet</h1>\n          </div>\n          <div *ngIf=\"tabChange == 1\">\n            <div  class=\"card card-you\" *ngFor=\"let tweet of tweets\">\n              <div *ngIf=\"tabChange ==1\" class=\"card-body card-body-body list-inline\">\n                  <a routerLink=\"/profile/{{user._id}}\" routerLinkActive=\"router-link-active\" >\n                    <img class=\"list-inline-item img-tweet\" src=\"{{user.picture}}\" alt=\"{{user.username}}\"\n                    class=\"mr-3\">\n                  </a>\n                  <a routerLink=\"/profile/{{user._id}}\" routerLinkActive=\"router-link-active\" >\n                    <h6 class=\"card-title list-inline-item\">{{user.firstName | titlecase}} {{user.lastName | titlecase}}\n                        <strong>@{{user.username}}</strong></h6>\n                  </a>\n                  <p class=\"card-text mt-3\">{{tweet.tweet}}</p>\n                <small class=\"text-muted \">{{tweet.dateTweeted | date : 'longDate'}}</small>\n              </div>\n          </div>\n          </div>\n          <div *ngIf=\"tabChange == 2\">\n            <app-following [userId]=\"userId\" (toReduce) =reduce($event)></app-following>\n          </div>\n          <div *ngIf=\"tabChange == 3\">\n              <app-followers [userId]=\"userId\" (toReduce) =reduce($event)></app-followers>\n          </div>\n        </div>\n        <div class=\"col-md-3\" *ngIf=\"tabChange == 1\" >\n            <app-suggestions [toRemove]=\"userId\"></app-suggestions>\n        </div>\n      </div>\n    </div>\n</div>\n\n\n<!-- Modal window -->\n<ng-template #template>\n    <div class=\"modal-header\">\n      <h4 class=\"modal-title pull-left\">Compose new Tweet</h4>\n      <button type=\"button\" class=\"btn btn-default\" (click)=\"modalRef.hide()\">\n        <span aria-hidden=\"true\">&times;</span></button>\n    </div>\n    <div class=\"modal-body\">\n      <form #profileForm =\"ngForm\" id=\"profileForm\" >\n        <div class=\"form-row\">\n            <div class=\"col\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"First name\" name=\"firstName\" [(ngModel)]=\"profile.firstName\">\n            </div>\n            <div class=\"col\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Last name\" name=\"lastName\" [(ngModel)]=\"profile.lastName\">\n            </div>\n          </div>\n          <br>\n          <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Bio\" name=\"bio\" [(ngModel)]=\"profile.bio\">\n          </div>\n          <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Location\" name=\"location\" [(ngModel)]=\"profile.location\">\n          </div>\n          <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Website\" name=\"website\" [(ngModel)]=\"profile.website\">\n          </div>\n      </form>\n      <button [disabled]=\"!profileForm.dirty\" form=\"profileForm\" type=\"button\" class=\"btn btn-primary\"\n         (click)=\"modalRef.hide();updateProfile()\">Save</button>\n    </div>\n  </ng-template>\n\n\n\n\n"
+module.exports = "<div style=\"background-color: #E8F5FD\">\n    <div class=\"card\">\n        <div class=\"card-image-top text-center\">\n            <img src=\"{{user?.picture}}\" alt=\"{{user?.username}}\" class=\"img-profile\">\n            <br>\n            <strong class=\"display-4\">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</strong>\n            <br>\n            <h5 class=\"text-muted text-center\">@{{user?.username}}</h5>\n        </div>\n        <div class=\"card-header\">\n            <div class=\"list-inline text-center\">\n                <small class=\"list-inline-item mr-3\"><strong>Tweets</strong></small>\n                <small class=\"list-inline-item mr-3\"><strong>Following</strong></small>\n                <small class=\"list-inline-item mr-3\"><strong>Followers</strong></small>\n            </div>\n            <div class=\"float-right clearfix mr-5 button-change\">\n              <button *ngIf=\"toFollow\" type=\"button\" class=\"btn btn-outline-primary  \" (click)=\"follow(user?._id)\">Follow</button>\n              <button *ngIf=\"user?._id == authService.user?.user._id\" type=\"button\" class=\"btn btn-outline-secondary\" \n              (click)=\"openModal(template)\">Edit profile</button>\n              <button *ngIf=\"!toFollow && user?._id != authService.user?.user._id \" type=\"button\" class=\"btn btn-primary  \"\n                (click)=\"unfollow(user?._id)\" (mouseover)=\"statusChange='unfollow'\" \n                (mouseleave)=\"statusChange='following'\">{{statusChange | titlecase}}</button>\n            </div>\n            <div class=\"list-inline text-center\">\n              <a class=\"btn\" (click)=\"change(1)\" [ngClass]=\"tabChange == 1 ? 'tabChange' : 'unChange'\"  >\n                <h4  class=\"list-inline-item mr-3\">{{numberOfTweets}}</h4>\n              </a>\n              <a class=\"btn\" (click)=\"change(2)\" [ngClass]=\"tabChange == 2 ? 'tabChange' : 'unChange'\">\n                <h4  class=\"list-inline-item ml-2\">\n                  {{numberOfFollowing}}</h4>\n              </a>\n              <a  class=\"btn\" (click)=\"change(3)\" [ngClass]=\"tabChange == 3 ? 'tabChange' : 'unChange'\">\n                <h4  class=\"list-inline-item ml-5\">\n                  {{numberOfFollowers}}</h4>\n              </a>\n            </div>\n        </div>\n    </div>\n    <br>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-md-4\">\n            <p class=\"text-muted\">{{user?.profile?.bio | titlecase}}</p>\n            <p *ngIf=\"user?.profile?.location\" class=\"text-muted\"><i class=\"fas fa-map-marker-alt mr-2\">\n              {{user?.profile?.location | titlecase}}</i></p>\n            <p class=\"text-muted\"><i class=\"far fa-calendar-alt\">\n                Joined {{user?.dateCreated | date : 'longDate'}}</i></p>\n        </div>\n        <div class=\"col-md\">\n          <div *ngIf=\"tweets?.length == 0 && tabChange ==1 \">\n            <h1>No tweets yet</h1>\n          </div>\n          <div *ngIf=\"tabChange == 1\">\n            <div  class=\"card card-you\" *ngFor=\"let tweet of tweets\">\n              <div *ngIf=\"tabChange ==1\" class=\"card-body card-body-body list-inline\">\n                  <a routerLink=\"/profile/{{user.username}}\" routerLinkActive=\"router-link-active\" (click)=\"me(user._id)\">\n                    <img class=\"list-inline-item img-tweet\" src=\"{{user.picture}}\" alt=\"{{user.username}}\"\n                    class=\"mr-3\">\n                  </a>\n                  <a routerLink=\"/profile/{{user.username}}\" routerLinkActive=\"router-link-active\" (click)=\"me(user._id)\">\n                    <h6 class=\"card-title list-inline-item\">{{user.firstName | titlecase}} {{user.lastName | titlecase}}\n                        <strong>@{{user.username}}</strong></h6>\n                  </a>\n                  <p class=\"card-text mt-3\">{{tweet.tweet}}</p>\n                <small class=\"text-muted \">{{tweet.dateTweeted | date : 'longDate'}}</small>\n              </div>\n          </div>\n          </div>\n          <div *ngIf=\"tabChange == 2\">\n            <app-following [userId]=\"userId\" (toReduce) =reduce($event)></app-following>\n          </div>\n          <div *ngIf=\"tabChange == 3\">\n              <app-followers [userId]=\"userId\" (toReduce) =reduce($event)></app-followers>\n          </div>\n        </div>\n        <div class=\"col-md-3\" *ngIf=\"tabChange == 1\" >\n            <app-suggestions [toRemove]=\"userId\"></app-suggestions>\n        </div>\n      </div>\n    </div>\n</div>\n\n\n<!-- Modal window -->\n<ng-template #template>\n    <div class=\"modal-header\">\n      <h4 class=\"modal-title pull-left\">Compose new Tweet</h4>\n      <button type=\"button\" class=\"btn btn-default\" (click)=\"modalRef.hide()\">\n        <span aria-hidden=\"true\">&times;</span></button>\n    </div>\n    <div class=\"modal-body\">\n      <form #profileForm =\"ngForm\" id=\"profileForm\" >\n        <div class=\"form-row\">\n            <div class=\"col\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"First name\" name=\"firstName\" [(ngModel)]=\"profile.firstName\">\n            </div>\n            <div class=\"col\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Last name\" name=\"lastName\" [(ngModel)]=\"profile.lastName\">\n            </div>\n          </div>\n          <br>\n          <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Bio\" name=\"bio\" [(ngModel)]=\"profile.bio\">\n          </div>\n          <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Location\" name=\"location\" [(ngModel)]=\"profile.location\">\n          </div>\n          <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Website\" name=\"website\" [(ngModel)]=\"profile.website\">\n          </div>\n      </form>\n      <button [disabled]=\"!profileForm.dirty\" form=\"profileForm\" type=\"button\" class=\"btn btn-primary\"\n         (click)=\"modalRef.hide();updateProfile()\">Save</button>\n    </div>\n  </ng-template>\n\n\n\n\n"
 
 /***/ }),
 
@@ -1726,13 +1745,16 @@ var ProfileComponent = /** @class */ (function () {
     }
     ProfileComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var userAlternate, userAlternate;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.route.params.subscribe(function (res) { _this.userId = res['id']; });
+                        userAlternate = this.userId || localStorage.getItem('userId');
+                        this.userId = this.userService.userId || userAlternate;
+                        userAlternate = this.userId || localStorage.getItem('userId');
                         this.route.params.subscribe(function (res) { _this.tabChange = res['change'] || 1; });
-                        return [4 /*yield*/, this.getUser(this.userId)];
+                        return [4 /*yield*/, this.getUser(userAlternate)];
                     case 1:
                         _a.sent();
                         this.canFollow();
@@ -1873,6 +1895,10 @@ var ProfileComponent = /** @class */ (function () {
                 }
             });
         });
+    };
+    ProfileComponent.prototype.me = function (id) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
@@ -2200,7 +2226,7 @@ module.exports = "img {\r\n    border-radius: 50%;\r\n    width: 50px;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" >\n  <h4 class=\"text-center mt-3\">Who to follow?</h4>\n    <div class=\"card-body list-inline\" *ngFor=\"let user of suggestions\">\n        <div class=\"float-left\">\n            <a routerLink=\"/profile/{{user?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n              <img class=\"list-inline-item\" src=\"{{user?.picture}}\" alt=\"{{user?.username}}\"\n            class=\"mr-3\">\n            </a>\n        </div>\n       <div class=\"float-left\">\n          <a routerLink=\"/profile/{{user?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n            <h6 class=\"card-title list-inline-item\">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}\n            <strong>@{{user?.username}}</strong></h6>\n          </a>\n          <br>\n          <button type=\"button\" class=\"btn btn-outline-primary mt-1 btn-sm\" (click)=\"follow(user._id)\">Follow</button>\n          <hr>\n       </div>\n    </div>\n    <p class=\"text-center\"><strong>Made by Samuel Essim</strong></p>\n    <p class=\"text-center text-muted\">© 2018 Twitter</p>\n  </div>\n"
+module.exports = "<div class=\"card\" >\n  <h4 class=\"text-center mt-3\">Who to follow?</h4>\n    <div class=\"card-body list-inline\" *ngFor=\"let user of suggestions\">\n        <div class=\"float-left\">\n            <a  routerLinkActive=\"router-link-active\" (click)=\"route(user?._id, user?.username)\">\n              <img class=\"list-inline-item\" src=\"{{user?.picture}}\" alt=\"{{user?.username}}\"\n            class=\"mr-3\">\n            </a>\n        </div>\n       <div class=\"float-left\">\n          <a  routerLinkActive=\"router-link-active\" (click)=\"route(user?._id, user?.username)\">\n            <h6 class=\"card-title list-inline-item\">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}\n            <strong>@{{user?.username}}</strong></h6>\n          </a>\n          <br>\n          <button type=\"button\" class=\"btn btn-outline-primary mt-1 btn-sm\" (click)=\"follow(user._id)\">Follow</button>\n          <hr>\n       </div>\n    </div>\n    <p class=\"text-center\"><strong>Made by Samuel Essim</strong></p>\n    <p class=\"text-center text-muted\">© 2018 Twitter</p>\n  </div>\n"
 
 /***/ }),
 
@@ -2218,6 +2244,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../_services/user.service */ "./src/app/_services/user.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2266,11 +2293,13 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var SuggestionsComponent = /** @class */ (function () {
-    function SuggestionsComponent(userService, alertify, authService) {
+    function SuggestionsComponent(userService, alertify, authService, router) {
         this.userService = userService;
         this.alertify = alertify;
         this.authService = authService;
+        this.router = router;
         this.reduce = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
     }
     SuggestionsComponent.prototype.ngOnInit = function () {
@@ -2312,8 +2341,10 @@ var SuggestionsComponent = /** @class */ (function () {
             this.suggestions = this.suggestions;
         }
     };
-    SuggestionsComponent.prototype.route = function () {
-        window.location.reload();
+    SuggestionsComponent.prototype.route = function (id, name) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
+        this.router.navigate(['profile', 'name']);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"])('toRemove'),
@@ -2331,7 +2362,8 @@ var SuggestionsComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"],
             _services_alertify_service__WEBPACK_IMPORTED_MODULE_1__["AlertifyService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_0__["AuthService"]])
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_0__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], SuggestionsComponent);
     return SuggestionsComponent;
 }());
@@ -2355,7 +2387,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    apiUrl: 'api/'
+    apiUrl: 'http://localhost:3030/api/'
 };
 /*
  * For easier debugging in development mode, you can import the following file

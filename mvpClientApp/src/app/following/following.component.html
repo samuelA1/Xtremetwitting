@@ -7,13 +7,13 @@
         <h1>You're the user he's following</h1>
     </div>
    <div *ngIf="following._id != authService.user?.user._id">
-    <a routerLink="/profile/{{following?._id}}" routerLinkActive="router-link-active" (click)="route()">
+    <a routerLink="/profile/{{following?.username}}" routerLinkActive="router-link-active" (click)="profile(following?._id)">
       <img class="card-img-top" src="{{following?.picture}}" alt="following?.username" style="height: 100px;">
     </a>
     <div class="card-body">
-        <button *ngIf="authService.user?.user._id == userId" type="button" class="btn btn-primary float-right mr-5"
+        <button *ngIf="authService.user?.user._id == userId" type="button" class="btn btn-primary float-right"
          (click)="unfollow(following?._id)">unfollow</button>
-        <a routerLink="/profile/{{following?._id}}" routerLinkActive="router-link-active" (click)="route()">
+        <a routerLink="/profile/{{following?.username}}" routerLinkActive="router-link-active" (click)="profile(following?._id)">
           <strong>{{following?.firstName | titlecase}} {{following?.lastName | titlecase}}</strong>
         </a>
         <br>

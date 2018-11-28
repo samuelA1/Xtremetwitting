@@ -2,6 +2,7 @@ import { AuthService } from './../_services/auth.service';
 import { AlertifyService } from './../_services/alertify.service';
 import { UserService } from './../_services/user.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-suggestions',
@@ -15,7 +16,8 @@ export class SuggestionsComponent implements OnInit {
 
   constructor(private userService: UserService,
      private alertify: AlertifyService, 
-     private authService: AuthService) { }
+     private authService: AuthService,
+     private router: Router) { }
 
   async ngOnInit() {
     const suggestion = await this.userService.getSuggestions();
@@ -40,8 +42,10 @@ export class SuggestionsComponent implements OnInit {
     
   }
 
-  route() {
-    window.location.reload();
+  route(id, name) {
+    this.userService.userId = id;
+    localStorage.setItem('userId', id);
+    this.router.navigate(['profile', 'name'])
   }
 
 

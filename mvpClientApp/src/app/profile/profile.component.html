@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-md-4">
             <p class="text-muted">{{user?.profile?.bio | titlecase}}</p>
-            <p *ngIf="user.profile?.location" class="text-muted"><i class="fas fa-map-marker-alt mr-2">
+            <p *ngIf="user?.profile?.location" class="text-muted"><i class="fas fa-map-marker-alt mr-2">
               {{user?.profile?.location | titlecase}}</i></p>
             <p class="text-muted"><i class="far fa-calendar-alt">
                 Joined {{user?.dateCreated | date : 'longDate'}}</i></p>
@@ -53,11 +53,11 @@
           <div *ngIf="tabChange == 1">
             <div  class="card card-you" *ngFor="let tweet of tweets">
               <div *ngIf="tabChange ==1" class="card-body card-body-body list-inline">
-                  <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
+                  <a routerLink="/profile/{{user.username}}" routerLinkActive="router-link-active" (click)="me(user._id)">
                     <img class="list-inline-item img-tweet" src="{{user.picture}}" alt="{{user.username}}"
                     class="mr-3">
                   </a>
-                  <a routerLink="/profile/{{user._id}}" routerLinkActive="router-link-active" >
+                  <a routerLink="/profile/{{user.username}}" routerLinkActive="router-link-active" (click)="me(user._id)">
                     <h6 class="card-title list-inline-item">{{user.firstName | titlecase}} {{user.lastName | titlecase}}
                         <strong>@{{user.username}}</strong></h6>
                   </a>

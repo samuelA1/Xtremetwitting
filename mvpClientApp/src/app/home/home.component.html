@@ -22,11 +22,11 @@
               <div class="card">
                   <div class="card-body">
                     <div class="text-center">
-                        <a routerLink="/profile/{{authService.user?.user._id}}" routerLinkActive="router-link-active" >
+                        <a routerLink="/profile/{{authService.user?.user.username}}" routerLinkActive="router-link-active" (click)="profile(authService.user?.user._id)">
                           <img src="{{authService.user?.user.picture}}" alt="{{authService.user?.user.username}}">
                         </a>
                       <br>
-                      <a routerLink="/profile/{{authService.user?.user._id}}" routerLinkActive="router-link-active" >
+                      <a routerLink="/profile/{{authService.user?.user.username}}" routerLinkActive="router-link-active" (click)="profile(authService.user?.user._id)">
                         <strong>{{authService.user?.user.firstName | titlecase}} {{authService.user?.user.lastName | titlecase}}</strong>
                       </a>
                       
@@ -39,13 +39,13 @@
                       <small class="list-inline-item mr-3"><strong>Followers</strong></small>
                     </div>
                     <div class="list-inline text-center">
-                      <a [routerLink]="['/profile', authService.user?.user._id, {change: 1}]" routerLinkActive="router-link-active"  >
+                      <a [routerLink]="['/profile', authService.user?.user.username, {change: 1}]" routerLinkActive="router-link-active" (click)="profile(authService.user?.user._id)" >
                         <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfTweets}}</h4>
                       </a>
-                      <a [routerLink]="['/profile', authService.user?.user._id, {change: 2}]" routerLinkActive="router-link-active"  >
+                      <a [routerLink]="['/profile', authService.user?.user.username, {change: 2}]" routerLinkActive="router-link-active" (click)="profile(authService.user?.user._id)" >
                         <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowing}}</h4>
                       </a>
-                      <a [routerLink]="['/profile', authService.user?.user._id, {change: 3}]" routerLinkActive="router-link-active"  >
+                      <a [routerLink]="['/profile', authService.user?.user.username, {change: 3}]" routerLinkActive="router-link-active" (click)="profile(authService.user?.user._id)" >
                         <h4 style="color:#1DA1F2" class="list-inline-item mr-5">{{numberOfFollowers}}</h4>
                       </a>
                     </div>

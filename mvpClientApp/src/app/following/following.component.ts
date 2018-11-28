@@ -34,7 +34,9 @@ export class FollowingComponent implements OnInit {
     this.toReduce.emit(-1);
   }
 
-  route() {
+  profile(id) {
+    this.userService.userId = id;
+    localStorage.setItem('userId', id);
     window.location.reload();
   }
 

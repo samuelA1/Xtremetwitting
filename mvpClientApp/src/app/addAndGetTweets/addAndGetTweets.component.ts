@@ -1,3 +1,4 @@
+import { UserService } from './../_services/user.service';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { TweetService } from '../_services/tweet.service';
 import { AlertifyService } from '../_services/alertify.service';
@@ -17,15 +18,16 @@ tweet: any = {}
 tweets: any[];
   
 
-  constructor(private userService: TweetService,
+  constructor(private tweetService: TweetService,
      private alertify: AlertifyService, 
     private authService: AuthService,
+    private userService: UserService
     ) { }
 
   async getTweets() {
     try {
-      var tweets = await this.userService.getTweets();
-      var recentTweets = await this.userService.getUserRecentTweets();
+      var tweets = await this.tweetService.getTweets();
+      var recentTweets = await this.tweetService.getUserRecentTweets();
       if (tweets['success']) {
         var huge = tweets['tweets'].concat(recentTweets['tweets']);
         this.tweets = huge.sort( function ( a, b ) { return b.dateTweeted - a.dateTweeted; } )
@@ -40,7 +42,7 @@ tweets: any[];
   async postTweet() {
     try {
       if (this.tweetValidation()) {
-        var tweet = await this.userService.postTweet(this.tweet);
+        var tweet = await this.tweetService.postTweet(this.tweet);
         this.tweets.unshift({dateTweeted: Date.now(),
         tweet: this.tweet['tweet'], _id: tweet['tweetId'], owner: {firstName: this.authService.user.user.firstName,
         lastName: this.authService.user.user.lastName, username: this.authService.user.user.username,
@@ -64,7 +66,7 @@ tweets: any[];
 
   async deleteTweet(id) {
     this.alertify.confirm('Are you sure you want to delete this tweet?', () => {
-      this.userService.deleteTweet(id);
+      this.tweetService.deleteTweet(id);
       this.tweets.splice(this.tweets.findIndex(t => t._id === id), 1)
       this.alertify.success('Tweet deleted');
       this.reduce.emit(-1);
@@ -78,6 +80,12 @@ tweets: any[];
       this.alertify.error('Please enter a tweet')
     }
   }
+
+  profile(id) {
+    this.userService.userId = id;
+    localStorage.setItem('userId', id);
+
+  }
   
   async ngOnInit() {
     this.token = localStorage.getItem('token');
@@ -87,7 +95,7 @@ tweets: any[];
   }
 
   addRecentTweet() {
-    this.userService.recentTweet.subscribe(tweetObj => this.tweets.unshift(tweetObj))
+    this.tweetService.recentTweet.subscribe(tweetObj => this.tweets.unshift(tweetObj))
   }
 
   keepTweet() {

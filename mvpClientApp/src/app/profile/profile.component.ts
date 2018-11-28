@@ -31,9 +31,11 @@ export class ProfileComponent implements OnInit {
     public authService: AuthService) { }
     
   async ngOnInit() {
-    this.route.params.subscribe(res => {this.userId = res['id'];})
+    var userAlternate = this.userId || localStorage.getItem('userId');
+    this.userId = this.userService.userId || userAlternate;
+    var userAlternate = this.userId || localStorage.getItem('userId');
     this.route.params.subscribe(res => {this.tabChange = res['change'] || 1 });
-    await this.getUser(this.userId);
+    await this.getUser(userAlternate);
     this.canFollow();
     this.statusChange = 'following'
   }
@@ -122,5 +124,10 @@ export class ProfileComponent implements OnInit {
     } catch (error) {
       this.alertify.error(error.message);
     }
+  }
+
+  me(id) {
+    this.userService.userId = id;
+    localStorage.setItem('userId', id);
   }
 }

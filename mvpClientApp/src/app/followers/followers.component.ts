@@ -44,7 +44,13 @@ export class FollowersComponent implements OnInit {
     this.followers.push(Object.assign(found, {both: false}));
   }
 
-  route() {
+  // route() {
+  //   window.location.reload();
+  // }
+
+  profile(id) {
+    this.userService.userId = id;
+    localStorage.setItem('userId', id);
     window.location.reload();
   }
 }
