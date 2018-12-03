@@ -2104,7 +2104,7 @@ module.exports = "input{\r\n    border-radius: 30px;\r\n    width: 300px;\r\n}\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"col\">\n      <div ngbDropdown class=\"d-inline-block\">\n        <input [(ngModel)]=\"searchTweet.search\" name=\"search\" (keyup)=\"search()\" type=\"text\" id=\"dropdownBasic1\" ngbDropdownToggle class=\"form-control\" placeholder=\"Search...\">\n        <div ngbDropdownMenu aria-labelledby=\"dropdownBasic1\">\n          <div *ngFor=\"let user of users\" class=\"ml-2\">\n              <a routerLink=\"/profile/{{user?._id}}\" routerLinkActive=\"router-link-active\" (click)=\"route()\">\n                <img class=\"list-inline-item\" src=\"{{user?.picture}}\" alt=\"{{user?.username}}\"\n              class=\"mr-2\">\n            <h6 class=\"card-title list-inline-item\">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}\n              <strong class=\"mr-3\">@{{user?.username}}</strong></h6>\n              </a>\n              <hr>\n          </div>\n          <small class=\"text-muted ml-4\">Search all people for <strong>{{searchTweet.search}}</strong></small>\n        </div>\n      </div>\n  </div>\n</div>\n  \n  "
+module.exports = "<div class=\"row\">\n    <div class=\"col\">\n      <div ngbDropdown class=\"d-inline-block\">\n        <input [(ngModel)]=\"searchTweet.search\" name=\"search\" (keyup)=\"search()\" type=\"text\" id=\"dropdownBasic1\" ngbDropdownToggle class=\"form-control\" placeholder=\"Search...\">\n        <div ngbDropdownMenu aria-labelledby=\"dropdownBasic1\">\n          <div *ngFor=\"let user of users\" class=\"ml-2\">\n              <a routerLink=\"/profile/{{user?.username}}\" routerLinkActive=\"router-link-active\" (click)=\"route({user?._id)\">\n                <img class=\"list-inline-item\" src=\"{{user?.picture}}\" alt=\"{{user?.username}}\"\n              class=\"mr-2\">\n            <h6 class=\"card-title list-inline-item\">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}\n              <strong class=\"mr-3\">@{{user?.username}}</strong></h6>\n              </a>\n              <hr>\n          </div>\n          <small class=\"text-muted ml-4\">Search all people for <strong>{{searchTweet.search}}</strong></small>\n        </div>\n      </div>\n  </div>\n</div>\n  \n  "
 
 /***/ }),
 
@@ -2190,7 +2190,9 @@ var SearchComponent = /** @class */ (function () {
     };
     SearchComponent.prototype.ngOnInit = function () {
     };
-    SearchComponent.prototype.route = function () {
+    SearchComponent.prototype.route = function (id) {
+        this.userService.userId = id;
+        localStorage.setItem('userId', id);
         window.location.reload();
     };
     SearchComponent = __decorate([
@@ -2344,8 +2346,7 @@ var SuggestionsComponent = /** @class */ (function () {
     SuggestionsComponent.prototype.route = function (id, name) {
         this.userService.userId = id;
         localStorage.setItem('userId', id);
-        window.location.reload()
-        this.router.navigate(['/profile', "" + name]);
+        this.router.navigate(['/profile', 'name']);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"])('toRemove'),
