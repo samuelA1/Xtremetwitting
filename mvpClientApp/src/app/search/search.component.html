@@ -4,7 +4,7 @@
         <input [(ngModel)]="searchTweet.search" name="search" (keyup)="search()" type="text" id="dropdownBasic1" ngbDropdownToggle class="form-control" placeholder="Search...">
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <div *ngFor="let user of users" class="ml-2">
-              <a routerLink="/profile/{{user?.username}}" routerLinkActive="router-link-active" (click)="route({user?._id)">
+              <a routerLink="/profile/{{user?.username}}" routerLinkActive="router-link-active" (click)="route(user?._id)">
                 <img class="list-inline-item" src="{{user?.picture}}" alt="{{user?.username}}"
               class="mr-2">
             <h6 class="card-title list-inline-item">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}
