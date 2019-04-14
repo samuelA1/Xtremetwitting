@@ -2195,7 +2195,7 @@ var SearchComponent = /** @class */ (function () {
         localStorage.setItem('userId', id);
         setTimeout(function () {
             window.location.reload();
-        }, 1000);
+        }, 200);
     };
     SearchComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2346,13 +2346,12 @@ var SuggestionsComponent = /** @class */ (function () {
         }
     };
     SuggestionsComponent.prototype.route = function (id, name) {
-        var _this = this;
         this.userService.userId = id;
         localStorage.setItem('userId', id);
+        this.router.navigate(["/profile/" + name]);
         setTimeout(function () {
-            _this.router.navigate(["/profile/" + name]);
             window.location.reload();
-        }, 1000);
+        }, 200);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"])('toRemove'),
