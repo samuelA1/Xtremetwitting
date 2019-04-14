@@ -2195,7 +2195,7 @@ var SearchComponent = /** @class */ (function () {
         localStorage.setItem('userId', id);
         setTimeout(function () {
             window.location.reload();
-        }, 200);
+        }, 1000);
     };
     SearchComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2351,7 +2351,8 @@ var SuggestionsComponent = /** @class */ (function () {
         localStorage.setItem('userId', id);
         setTimeout(function () {
             _this.router.navigate(["/profile/" + name]);
-        }, 200);
+            window.location.reload();
+        }, 1000);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"])('toRemove'),
