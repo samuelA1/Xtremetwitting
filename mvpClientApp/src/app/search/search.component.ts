@@ -27,7 +27,9 @@ export class SearchComponent implements OnInit {
   route(id) {
     this.userService.userId = id;
     localStorage.setItem('userId', id);
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 200);
   }
 
 }

@@ -45,7 +45,10 @@ export class SuggestionsComponent implements OnInit {
   route(id, name) {
     this.userService.userId = id;
     localStorage.setItem('userId', id);
-    this.router.navigate(['/profile', 'name'])
+    setTimeout(() => {
+      this.router.navigate([`/profile/${name}`]);
+    }, 200);
+    
   }
 
 
