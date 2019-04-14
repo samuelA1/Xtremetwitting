@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
     localStorage.setItem('userId', id);
     setTimeout(() => {
       window.location.reload();
-    }, 200);
+    }, 1000);
   }
 
 }
